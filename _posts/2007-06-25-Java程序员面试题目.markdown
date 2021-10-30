@@ -1,0 +1,181 @@
+---
+layout: post
+title:  "Java程序员面试题目"
+date:   2007-06-21 16:25:00 +0800
+categories: life-and-work
+---
+
+作者：metaphy
+
+日期：2007-5-30
+
+版本：V2.01
+
+说明：题目和答案源自metaphy过去知识、经验积累和网络，metaphy不能保证其正确性和完整性，仅供参考。转载请注明原作者及版本及该说明。(5573255960011251209L)
+ 
+Part I Java2基础知识
+
+▲面向对象编程语言的3个基本特征是什么?
+
+封装,继承,多态.(From: Thinking in Java)
+ 
+▲Object有哪些方法?说出3个
+
+equals, toString, hashCode, getClass, notify, notifyAll, wait
+ 
+▲抽象类和接口的区别
+
+1) 一个类只能使用一次继承关系继承一个抽象类。但是，一个类却可以实现多个interface。
+2）interface 中属性默认是 public static final的，而abstract class 不是。而在abstract class方式中，可以有自己的数据成员，也可以有非abstarct的成员方法。
+3）从设计上讲，abstract class表示的是"is a"关系，interface表示的是"like a"关系。
+ 
+▲简叙java集合类
+
+Java集合分3类：分别是Set,List,Map,其中Set,List 继承自Collection接口。Map不是。
+Set是无序集，下面有HashSet, TreeSet, LinkedHashSet，List是有序集，下面有 ArrayList, LinkedList, Map不是通常意义的集合，它是一个键-值对。
+ 
+▲Hashtable & HashMap 的区别
+
+HashMap不是线程安全的，Hashtable是
+HashMap允许null值（键和值都可以），Hashtable不允许
+ 
+▲Java IO中,InputStream 和Reader 的区别
+
+InputStream是基于字节流,而Reader是基于字符流
+ 
+Part II J2EE知识（含JavaScript，XML，HTML知识）
+
+▲J2EE技术框架包括哪些技术?
+
+-Enterprise JavaBeans (EJB)
+-Java Interface Definition Language(IDL)
+-Java Message Service (JMS)
+-Java Naming and Directory Interface(JNDI)
+-Java Remote Method Invocation(RMI) 和 Object Serialization
+-Java Servlet API
+-Java Server Pages(JSP)
+-Java Transaction API (JTA)
+-Java Transaction Service(JTS)
+-JDBC
+ 
+▲JDBC中STATEMENT的分类
+
+-Statement
+-PreparedStatement(预编译语句)
+-CallableStatement(可调用语句):用来执行存储过程
+ 
+▲JDBC中如何手工实现事务的提交和回滚?
+
+{% highlight java %}
+try{      
+    conn = DriverManager.getConnection("...");      
+    conn.setAutoCommit(false);      
+    stmt = conn.createStatement();      
+    stmt.executeUpdate("sql...");      
+    stmt.executeUpdate("sql...");      
+    conn.commit();      
+}catch(Exception e){      
+    e.printStackTrace();      
+    try{      
+        conn.rollback(); //      
+    }catch(Exception e){      
+        e.printStackTrace();             
+    }      
+}     
+ {% endhighlight %}
+
+▲关闭JDBC Connection 和 PreparedStatement的方式.
+
+{% highlight java %}
+try{   
+    /*...*/  
+    pstmt.close () ;   
+    conn.close();   
+}catch(Exception e){   
+    /*…*/  
+}finally{   
+    try{   
+        if(pstmt!=null)  pstmt.close();   
+    }catch(Exception e){}   
+    try{   
+        if(conn!=null)  conn.close();   
+    }catch(Exception e){}   
+}  
+{% endhighlight %}
+ 
+▲JSP的内置对象
+
+request、response、out、session、page、pageContext、application、config、exception
+ 
+▲Servlet的生命周期
+
+容器加载
+初始化 init()
+服务，根据请求，返回应答 service()
+销毁 destroy()
+ 
+▲解析XML的API
+
+有DOM、SAX、JAXP、JDOM 和 DOM4J等
+DOM : JAVA/JAVASCRIPT/PERL等均支持，缺点是将一个文档当作一个树一次读入，如果文档特别大（如10M）将会十分低效
+JDOM :JAVA自己定的
+SAX: 也是Java定的，后移植到C++等语言
+ 
+▲XML的定义(关于XML文档有效性的定义)方法及其之间的区别
+
+DTD:DTD 是参考 SGML DTD 创造出的 XML 格式定义方法。DTD 的格式定义采用与 XML 不同的语法，这使得很难直接用解析器来解析 DTD，也很难动态（runtime）验证 XML 的有效性。
+XML Schema:XML Schema是W3C 后来创造的。Schema 是一种新型的 XML 格式定义方法，它完全采用 XML 语法，便于解析器处理，而且对于数据格式的定义更加严格和精确，所以 Schema 更加适合面向数据的应用。
+RELAX NG :RELAX NG 是一种以 RELAX（由日本人开发）与 TREX（由 XML 界的权威 James Clark 开发）为基础的模式语言。它的基本思想与 Schema 相同，也采用 XML 格式，所以程序处理起来也很方便。而且它的语法比 Schema 要简单的多。但是目前 RELAX NG 还不是 W3C 的标准，所以大多数解析器都不支持。
+ 
+▲XML的显示格式的定义方式
+
+有两种：CSS 和 XSLT。XSLT 的主要作用是将 XML 由一种格式转换为另一种格式。例如由 XML 的一种词汇集（vocabulary）转换为另一种词汇集（vocabulary），或者由 XML 转换为 HTML 或者 XHTML。所以 XML 页面要在浏览器中显示必须结合 CSS 或者 XSLT 样式单。
+ 
+▲XML名词解释
+
+HTML  HyperText Markup Language
+XML   eXtensible Markup Language
+SGML  Standard Generalized Markup Language
+DTD    Document Type Definition
+XSLT  eXtensible Stylesheet Language-Transformation
+DOM  Document Object Modle
+SAX    Simple API for XML
+ 
+▲Html页面表示白色的16进制码是什么？（只有外国人才会问这么基础的问题，我当时答错了，惭愧啊。这个答案就不给了。）
+ 
+Part III 数据库相关
+
+▲快速删除表中所有数据
+
+truncate table table_name
+delete from table_name记录行操作日志，而truncate只是记录一次操作日志，因此速度更快。
+ 
+▲Table,View,Temporary table 的区别之处
+
+VIEW只是一个定义，其中的数据还是基于table;
+临时表是临时定义的表，它在用户关闭数据库连接之后将删除。
+为什么要使用临时表呢？主要是为了暂时存储数据，以便再次处理
+ 
+▲left outer join ,right outer join 的区别
+
+left outer join:左面的那个表的记录全部返回，右面那个表只返回满足条件的的记录。不满足条件的，对应左表用null填充。
+right outer join:和上一个正好相反。
+full outer join:两边表都返回，不满足条件就用null填充
+上面是外连接，内连接是一个这样的形式：
+sql 代码
+select a.id, a.name ,b.id,b.score from a,b where a.id = b.id   
+返回的结果是2者的交集。
+ 
+Part IV 问题分析、编程能力和算法
+
+▲999条直线最多能将一个平面分成多少部分？（来自IBM的面试题）
+
+归纳法：
+
+{% highlight java %}
+f(1) = 2
+f(2) = 4
+f(3) = 7
+f(4) = 11
+f(n) = f(n-1) + n     (n>=2)
+{% endhighlight %}

@@ -1,0 +1,18 @@
+---
+layout: post
+title:  "自动备份，批处理，windows计划任务"
+date:   2006-03-23 18:45:00 +0800
+categories: script
+---
+写了个自动备份的批处理，每天18：18 自动执行，mmd，让老子老是手动备份，1个多月，靠谁的大爷；n久没写java程序了，老是加班做vb，mmd，再靠一次
+
+//autobak.bat
+
+{% highlight shell %}
+@echo off
+d:
+cd \PROJECT_SRC\H\
+xcopy client \BackUP\ /E /Y /C
+xcopy client D:\BackUP\Client\  /E /Y /C
+ 
+{% endhighlight %}
