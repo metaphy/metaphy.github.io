@@ -1,0 +1,266 @@
+---
+layout: post
+title:  "算术表达式求值"
+date:   2008-02-04 16:11:00 +0800
+categories: life-and-work
+---
+
+词法分析
+{% highlight java %}
+package compile;  
+/** 
+ * 词法分析：返回数字和操作符号的序列 
+ * @author metaphy 
+ * 2007-6-14 
+ */  
+public class Lexer {  
+    public static final String EOS = " " ;  /*token之间的分隔符*/  
+    public static final String DONE ="=" ;  /*token结束的标记*/  
+    private StringBuffer tokens = new StringBuffer();  
+    private String expression = null;  
+      
+    public Lexer(String expression) {  
+        super();  
+        this.expression = expression;  
+    }  
+      
+    /*判断在是否数字*/  
+    private boolean isDigit(char c){  
+        return c>='0' && c<='9' ;  
+    }  
+    /*判断是否操作符*/  
+    private boolean isOperator(char c){  
+        return c=='+' ||c=='-' ||c=='*' ||c=='/'|| c=='('|| c==')' ||c=='%' || c=='^';   
+    }  
+    /*判断是否字母*/  
+    private  boolean isAlpha(char c){  
+        return c>='a' && c<= 'z' || c>='A' && c<='Z' ;  
+    }  
+      
+    /*以EOS为分隔符将单词分隔*/  
+    public String lexan(){  
+        String str ="" ;    /*数字序列*/  
+        for (int i=0 ;i< expression.length(); i++){    
+            char ch = expression.charAt(i) ;  
+            if( (isOperator(ch) || isAlpha(ch)) && !str.equals("")){  
+                tokens.append(str.trim()) ;  
+                tokens.append(EOS) ;  
+                str="" ;  
+            }  
+            if(ch ==' ' || ch== '\t'){  
+                ;  
+            }else if(isDigit(ch)){      //数字  
+                if (!(str.equals("") && ch=='0')){  
+                    str += String.valueOf(ch) ;  
+                }  
+            }else if(isOperator(ch)){   //操作符  
+                str = "" ;  
+                tokens.append(ch) ;  
+                tokens.append(EOS) ;  
+            }else{                      //其他符号未处理  
+  
+            }  
+            if((i==expression.length() -1) && !str.trim().equals("")) {  
+                tokens.append(str.trim()) ;  
+                tokens.append(EOS) ;  
+            }  
+        }  
+        tokens.append(DONE) ;  
+        return tokens.toString().trim();  
+    }  
+}  
+{% endhighlight %}
+
+语法分析和翻译
+{% highlight java %}
+package compile;  
+  
+import java.util.ArrayList;  
+import java.util.Stack;  
+  
+/** 
+ * 语法分析和翻译：算术表达式求值。非负整数的加、减、乘、除、取模和幂操作， 
+ * 优先级顺序为：幂=>乘、除、模=>加、减，同级求值顺序从左向右，小括号可以改变优先级。 
+ * BNF定义： 
+ * digit -> 0|1|2|3|4|5|6|7|8|9|digit  
+ * factor -> digit | ( exp )  
+ * power -> factor | power ^ factor  
+ * term -> power | term * power | term / power | term % power 
+ * exp -> term | exp + term | exp - term  
+ *  
+ * @author metaphy 
+ * 2007-6-14 
+ */  
+  
+public class Parser {  
+//  String s = "2 000*(33%10)+  12/ (9-3) * (6-2+ 11) + 2^3 " ;  
+//  String s = " 3 3 * (008 % 6)" ;  
+//  String s = "1+1";  
+//  String s = "3^(1+1)";  
+    String s = "(100-95)*3^(1+1)";  
+    private Lexer lex = new Lexer(s) ;  
+      
+    private ArrayList tokenList ;  
+    private String lookahead;  
+    private int pointer ;  
+    Stack stack = new Stack() ;     //后缀表达式计算堆栈  
+      
+    private void init(){  
+        tokenList = new ArrayList() ;  
+        String tokenString = lex.lexan() ;  
+        System.out.print (tokenString);  
+        String[] strs = tokenString.split(Lexer.EOS) ;  
+        lookahead = strs[0].trim() ;  
+        pointer = 0 ;  
+        for (int i=0 ;i< strs.length; i++){  
+            if(strs[i]==null) {  
+                error();  
+                return ;  
+            }  
+            tokenList.add(strs[i].trim());  
+        }  
+    }  
+    /*判断在是否整数*/  
+    private boolean isDigit(String str){  
+        try{  
+            Long.parseLong(str);  
+            return true ;  
+        }catch(Exception e){  
+            return false ;  
+        }  
+    }  
+    /*往下匹配*/  
+    private void matchNext(String t){  
+        if(lookahead.equals(t)){  
+            pointer ++ ;  
+            lookahead = (String)tokenList.get(pointer) ;  
+        }else {  
+            error() ;  
+        }  
+    }  
+    /*出错信息*/  
+    private void error(){  
+        System.out.println("error occurs, current obj: "+ lookahead);  
+        System.exit(1) ;  
+    }  
+      
+    /*因子：带小括号表达式或数字，第1优先级*/  
+    private void factor(){  
+        if(lookahead.equals("(")){  
+            matchNext("(") ;  
+            expr() ;  
+            matchNext(")") ;  
+        }else if(isDigit(lookahead)){  
+            emit(lookahead) ;  
+            matchNext(lookahead) ;  
+        }else {  
+            error() ;  
+        }  
+    }  
+      
+    /*乘幂操作，第2优先级*/  
+    private void power(){  
+        factor();  
+        while(true){  
+            if(lookahead.equals("^")){  
+                String tmp = lookahead ;  
+                matchNext(lookahead) ;  
+                factor() ;  
+                emit(tmp) ;  
+                continue ;  
+            }else{  
+                return ;  
+            }  
+        }  
+    }  
+      
+    /*乘、除、取模操作*/  
+    private void term(){  
+        power();  
+        while(true){  
+            if(lookahead.equals("*")||lookahead.equals("/")||lookahead.equals("%")){  
+                String tmp = lookahead;   
+                matchNext(lookahead) ;  
+                power();  
+                emit(tmp) ;  
+                continue ;  
+            }else{  
+                return ;  
+            }  
+        }  
+    }  
+      
+    /*表达式：term的+ - 操作*/  
+    private void expr(){  
+        term() ;  
+        while(true){  
+            if(lookahead.equals("+")||lookahead.equals("-")){  
+                String tmp = lookahead ;  
+                matchNext(lookahead);  
+                term();  
+                emit(tmp) ;  
+                continue ;  
+            }else{  
+                return ;  
+            }  
+        }  
+    }  
+      
+    /*生成后缀表达式，利用堆栈计算*/  
+    private void emit(String some){  
+//      System.out.println (some) ;  
+        if(isDigit(some)){  
+            stack.push(some) ;  
+        }else{  
+            long right =Long.parseLong((String) stack.pop()) ;  
+            long left =Long.parseLong((String) stack.pop()) ;  
+            long result =1 ;  
+            if(some.equals("+")){  
+                result = left + right;   
+            }else if(some.equals("-")){  
+                result = left - right;  
+            }else if(some.equals("*")){  
+                result = left * right;  
+            }else if(some.equals("/")){  
+                try{  
+                    result = left / right;  
+                }catch(Exception e){  
+                    System.err.println("除以0错误") ;  
+                    error() ;  
+                }  
+            }else if(some.equals("%")){  
+                result = left % right;  
+            }else if(some.equals("^")){  
+                for(int j = 1 ;j<= right ;j ++)  
+                    result *= left ;  
+            }else{  
+            }  
+            stack.push(String.valueOf(result));  
+        }  
+    }  
+    private String getValue (){  
+        if (stack==null || stack.firstElement() ==null ){  
+            error ();  
+        }  
+        return (String)stack.pop() ;  
+    }  
+      
+    /*begin*/  
+    private void parse(){  
+        while(! lookahead.equals(Lexer.DONE)){  
+            expr();  
+        }  
+    }  
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        Parser parser = new Parser() ;  
+        parser.init();  
+        parser.parse();  
+        System.out.println(parser.getValue()) ;  
+    }  
+}  
+运行结果：  
+( 100 - 95 ) * 3 ^ ( 1 + 1 ) =45  
+{% endhighlight %}

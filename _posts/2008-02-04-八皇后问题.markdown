@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "八皇后问题"
-date:   2007-10-07 14:41:00 +0800
+date:   2008-02-04 15:07:00 +0800
 categories: life-and-work
 ---
 
