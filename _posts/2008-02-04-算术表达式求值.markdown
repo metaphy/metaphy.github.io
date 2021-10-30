@@ -2,7 +2,7 @@
 layout: post
 title:  "算术表达式求值"
 date:   2008-02-04 16:11:00 +0800
-categories: life-and-work
+categories: java
 ---
 
 词法分析

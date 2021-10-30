@@ -2,7 +2,7 @@
 layout: post
 title:  "用Python抓网页上的图片"
 date:   2008-02-04 16:40:00 +0800
-categories: life-and-work
+categories: python
 ---
 
 用Python做这类事情简直太爽了，重发一个老的代码，可指定网址下载里面的图片
