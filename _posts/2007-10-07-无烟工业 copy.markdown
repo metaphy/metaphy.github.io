@@ -1,0 +1,59 @@
+---
+layout: post
+title:  "八皇后问题"
+date:   2007-10-07 14:41:00 +0800
+categories: life-and-work
+---
+
+根据C程序改的Java的实现。以下为已知的N-皇后解数目。
+
+{% highlight java %}
+public class Queens {  
+    private int[] queens = new int[8];  //解数组  
+    private int[] colflag =new int[8];  //列冲突标记  
+    private int[] flags1 = new int[15]; //对角线冲突标记  
+    private int[] flags2 = new int[15]; //对角线冲突标记  
+    private int roots ;  
+    private void trySet(int row){  
+        for (int column=0; column < 8; column++){  
+            if (colflag[column] == 0   
+                    && flags1[row-column + 7]==0   
+                    && flags2[row + column]==0 ){  
+                queens[row] = column;  
+                if (row <7){  
+                    colflag[column] = 1;  
+                    flags1[row-column + 7]= 1;  
+                    flags2[row + column]=1;  
+                    trySet(row+1);  
+                }else{  
+                    roots ++;  
+                    printit();  
+                }  
+                colflag[column] = 0;  
+                flags1[row-column + 7] = 0;  
+                flags2[row + column] = 0;  
+            }  
+        }  
+    }  
+    private void printit(){  
+        System.out.println (roots);  
+        for (int i = 0;i<8; i++){  
+            for (int j =0 ;j<8; j ++){  
+                if (queens[i]==j){  
+                    System.out.print (" x");  
+                }else{  
+                    System.out.print (" o");  
+                }  
+            }  
+            System.out.print("\n");  
+        }  
+        System.out.println("=================");  
+    }  
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        new Queens().trySet(0);       
+    }  
+}  
+{% endhighlight %}
