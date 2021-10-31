@@ -1,0 +1,248 @@
+---
+layout: post
+title:  "A*寻路"
+date:   2008-02-21 12:37:00 +0800
+categories: java
+---
+
+如图，绿方块是起点，红方块终点；蓝方块是水（障碍物）。想像在图的周围加上边界，建立坐标系，x和y分别从1开始，则x取值[1,9]，y取值[1,7]，起点坐标(3,4)，终点坐标(7,4);为简单起见，将坐标以一个整数标记:100 * y + x.
+
+
+路径搜寻过程中，有一点与参考文章不同的是，障碍物的角被认为是可穿过的，只要穿过之后的坐标不是障碍物或边界。
+
+
+参阅：http://www.cppblog.com/christanxw/archive/2006/04/07/5126.html
+英文原文：http://www.gamedev.net/reference/articles/article2003.asp
+
+
+{% highlight java %}
+
+/** 
+ * Author by metaphy 
+ * Date Feb 20, 2008 
+ */  
+package astar;  
+  
+import java.util.ArrayList;  
+  
+public class Coordinate {  
+    private int x;  
+    private int y;  
+    private int value;  
+    private Coordinate parent;  
+      
+    public Coordinate(){}  
+    public Coordinate(int x, int y) {  
+        this.x = x;  
+        this.y = y;  
+        this.value = 100 * y + x;  
+    }  
+    public Coordinate(int value) {  
+        this.x = value % 100;  
+        this.y = value / 100;  
+        this.value = value;  
+    }  
+      
+    public int getX() {  
+        return x;  
+    }  
+    public int getY() {  
+        return y;  
+    }  
+    public int getValue() {  
+        return value;  
+    }  
+      
+    public Coordinate getParent() {  
+        return parent;  
+    }  
+    public void setParent(Coordinate parent) {  
+        this.parent = parent;  
+    }  
+    /** 
+     * Whether or not it's border 
+     * @return 
+     */  
+    public boolean isBorder(){  
+        return x == 1 || x == 9 || y ==1 || y== 7 ;  
+    }  
+    /** 
+     * Whether or not it's barrier 
+     * @return 
+     */  
+    public boolean isWater(){  
+        return value == 305  
+            || value == 306  
+            || value == 405  
+            || value == 504  
+            || value == 505  
+        ;  
+    }  
+    /** 
+     * @param xx 
+     * @param yy 
+     * @return 
+     */  
+    public boolean valid(int xx, int yy){  
+        return xx >=1 && xx<=9 && yy >=1 && yy<=7;  
+    }  
+      
+    /** 
+     * Get valid adjacent coordinate list 
+     * @return 
+     */  
+    public ArrayList<Coordinate> getValidAdjacent(){  
+        ArrayList<Coordinate> list = new ArrayList<Coordinate>();  
+        for (int t = -1; t<= 1; t ++){  
+            for (int p = -1; p<= 1; p++){  
+                if (valid(x + t,y + p)){  
+                    Coordinate c = new Coordinate (x+t, y+p);  
+                    if (!c.isBorder() && !c.isWater()){  
+                        list.add(c);  
+                    }  
+                }  
+            }  
+        }  
+        return list;  
+    }  
+    /** 
+     * The G function  
+     * @param c 
+     * @return 
+     */  
+    public int getCostG(){  
+        if (parent != null){  
+            if (Math.abs(parent.getX () -x)==1 && Math.abs(parent.getY() - y )==1){  
+                return 14;  
+            }else {  
+                return 10;  
+            }  
+        }else {  
+            return 0 ;  
+        }  
+    }  
+    public int getCostG(Coordinate c){  
+        if (Math.abs(c.getX () -x)==1 && Math.abs(c.getY() - y )==1){  
+            return 14;  
+        }else if (c.getX() == x && Math.abs(c.getY()-y) == 1|| c.getY() ==y && Math.abs(c.getX() -x) ==1){  
+            return 10;  
+        }else {  
+            return Integer.MAX_VALUE;  
+        }  
+    }  
+    /** 
+     * The H function  
+     * @param c 
+     * @return 
+     */  
+    public int getDistanceH(Coordinate c){  
+        return (Math.abs(c.getX() - x) + Math.abs(c.getY() - y)) * 10;  
+    }  
+    /** 
+     * The F function 
+     * @param c 
+     * @return 
+     */  
+    public int getF(Coordinate c){  
+        return getCostG() + getDistanceH(c);  
+    }  
+}     
+
+/** 
+ * Author by metaphy 
+ * Date Feb 20, 2008 
+ */  
+package astar;  
+  
+import java.util.ArrayList;  
+  
+public class AStarSample {  
+    private ArrayList<Coordinate> openList = new ArrayList<Coordinate>();  
+    private ArrayList<Coordinate> closeList = new ArrayList<Coordinate>();  
+    private Coordinate start = new Coordinate(403);  
+    private Coordinate end = new Coordinate(407);  
+    /** 
+     * Try to find the path 
+     * @return 
+     */  
+    public boolean pathFinding(){  
+        Coordinate current = null;  
+        openList.add(start);  
+        do{  
+            current = lookForMinF();  
+            openList.remove(current);  
+            closeList.add(current);  
+            ArrayList<Coordinate> list = current.getValidAdjacent();  
+            for (Coordinate adjacent:list){  
+                if (!inClosedList(adjacent)){  
+                    if (!inOpenedList(adjacent)){  
+                        adjacent.setParent(current);  
+                        openList.add(adjacent);  
+                    }else{  
+                        int g0 = current.getParent().getCostG(adjacent);  
+                        int g1 = current.getCostG() + current.getCostG(adjacent);  
+                        if (g1 < g0){  
+                            adjacent.setParent(current);  
+                        }  
+                    }  
+                }  
+            }  
+        } while(!findTarget() && openList.size()>0);  
+        end.setParent(current);  
+          
+        if (findTarget()){  
+            Coordinate tmp = end;  
+            while (tmp.getValue() != start.getValue()){  
+                System.out.println(tmp.getValue());  
+                tmp = tmp.getParent();  
+            }  
+            System.out.println(start.getValue());  
+            return true;  
+        }else{  
+            System.out.println("Can't find the path.");  
+            return false;  
+        }  
+    }  
+    /** 
+     * Look for the min F value coordinate from open list  
+     * @return 
+     */  
+    private Coordinate lookForMinF(){  
+        Coordinate c = openList.get(0);  
+        for (Coordinate tmp :openList){  
+            if (tmp.getF(end) < c.getF(end)){  
+                c = tmp ;  
+            }  
+        }  
+        return c;  
+    }  
+    /** 
+     * Find the target or not 
+     * @return 
+     */  
+    private boolean findTarget(){  
+        for (Coordinate open: openList){  
+            if (open.getValue() == end.getValue())  
+                return true;  
+        }  
+        return false;  
+    }  
+    private boolean inClosedList(Coordinate c){  
+        for (Coordinate close: closeList){  
+            if (close.getValue() == c.getValue())  
+                return true;  
+        }  
+        return false;  
+    }  
+    private boolean inOpenedList (Coordinate c){  
+        for (Coordinate open: openList){  
+            if (open.getValue() == c.getValue())  
+                return true;  
+        }  
+        return false;  
+    }  
+    public static void main(String[] args) {  
+        new AStarSample().pathFinding();  
+    }  
+}  
+{% endhighlight %}

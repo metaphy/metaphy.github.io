@@ -1,0 +1,48 @@
+---
+layout: post
+title:  "分硬币问题的递归解法"
+date:   2008-02-17 13:36:00 +0800
+categories: java
+---
+
+确定将一定数量的钱（以分为单位）转换成两角五分的硬币，一角硬币，五分和一分硬币的方法总数。
+
+{% highlight java %}
+import java.util.Stack;  
+  
+public class Coin {  
+    private static int[] coins = {25,10,5,1};  
+    private static Stack<Integer> roots =new Stack<Integer>();  
+      
+    private static void divide(int num){  
+        for (int coin : coins){  
+            if (num - coin >=0 && (roots.size()==0 || coin <= roots.get(roots.size()-1))){  
+                roots.push(new Integer(coin));  
+                if (num - coin > 0){  
+                    divide (num - coin);  
+                } else {    // Get one  
+                    for (Integer root: roots){  
+                        System.out.print (root);  
+                        System.out.print (" ");  
+                    }  
+                    System.out.print ("\n");  
+                }  
+                roots.pop();  
+            }  
+        }  
+    }  
+      
+    public static void main(String[] args) {  
+        Coin.divide(17);  
+    }  
+}  
+
+
+运行结果（1角7分的硬币的所有可能的分法）：
+10 5 1 1
+10 1 1 1 1 1 1 1
+5 5 5 1 1
+5 5 1 1 1 1 1 1 1
+5 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+{% endhighlight %}
