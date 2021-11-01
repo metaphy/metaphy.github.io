@@ -1,0 +1,217 @@
+---
+layout: post
+title:  "排序算法"
+date:   2008-03-25 20:03:00 +0800
+categories: java
+---
+
+复习了一下排序算法。当年学数据结构的时候学的是头大脑袋蒙；现在依然蒙，但不像以前蒙的那么厉害了。
+
+{% highlight java %}
+
+package algorithm.sort;  
+public class Sort {  
+    private static int[] list = {7,3,4,1,9,2,8,5,6,0,5};  
+    /** 
+     * 冒泡排序, O(n^2) 
+     */  
+    private static void bubble(){  
+        for (int i = 0; i< list.length ; i++){  
+            for (int j= 0; j< list.length -i -1; j++){  
+                if (list[j] > list[j+1]){  
+                    int tmp = list[j];  
+                    list[j] = list[j+1];  
+                    list[j+1] = tmp;  
+                }  
+            }  
+        }  
+    }  
+    /** 
+     * 简单选择排序, O(n^2) 
+     * 将要排序的对象分成两部分，一部分是已排序的，一部分是未排序的，从未排序的部分选择最小的，并放入已排序部分的最后一个 
+     */  
+    private static void selection(){  
+        for (int i = 0; i< list.length; i++){  
+            int position = i;  
+            for (int j =i + 1; j< list.length; j++){  
+                if (list[position] > list[j]){  
+                    position = j;  
+                }  
+            }  
+            int tmp = list[i];  
+            list[i] = list[position];  
+            list[position] = tmp;  
+        }  
+          
+    }  
+    /** 
+     * 直接插入排序, O(n^2) 
+     * 将数据分为两部分，从后面部分依次取出数据，插入前面部分（插入后的前面这部分有序） 
+     */  
+    private static void insertion(){  
+        for (int i=1; i<list.length; i++){  
+            int j = i -1 ;  
+            int tmp = list[i];  
+            while(list[j] > tmp){  
+                list[j+1] = list[j];  
+                j--;  
+                if (j<0) break;  
+            }  
+            list [j+1] = tmp ;  
+        }  
+    }  
+    /** 
+     * 快速排序, O(n*log n) 
+     * 属于一种优化冒泡排序 
+     * 定义一个枢轴，使得在其之前的都小于它之后的都大于等于它，然后按这个法则在枢轴两边递归运算；枢轴一般取第一个元素 
+     */  
+    private static void quickSort(int low, int high){  
+        if (low < high){  
+            int p = partition(low,high);  
+            quickSort(low, p-1);  
+            quickSort(p+1, high);  
+        }  
+    }  
+    /** 
+     * 将序列划分为2个子序列，并返回枢轴元素位置；其中，枢轴元素前的元素都小于枢轴元素，后的都大于枢轴元素 
+     */  
+    private static int partition(int low, int high){  
+        int pivot = list[low];  
+        while(low < high){  
+            while(low < high && list[high] >= pivot) high --;  
+            list[low] = list[high];  
+            while(low < high && list[low] <= pivot) low ++;  
+            list[high] = list[low];  
+        }  
+        list[low] = pivot;  
+        return low;  
+    }  
+    /** 
+     * 希尔排序，又称“缩小增量排序”，是改进的直接插入排序方式 
+     * 时间复杂度依赖于步长序列，如当步长序列为delta[k]=2^(t-k+1) - 1,时间复杂度O(n^1.5) 
+     * 本例，我们选择步长序列为:{5,3,1} 
+     */  
+    private static void shell(){  
+        int[] step = {5,3,1};  
+        for (int i:step)  
+            shellInsert(i);  
+    }  
+    private static void shellInsert(int deltaK){  
+        for (int i=deltaK; i<list.length; i++){  
+            if (list[i]<list[i-deltaK]){  
+                int tmp = list[i];  
+                int j = i - deltaK;  
+                for (;j>=0 && tmp < list[j]; j-=deltaK ){  
+                    list[j + deltaK] = list[j];  
+                }  
+                list[j+deltaK] = tmp ;  
+            }  
+        }  
+    }  
+      
+    public static void main(String[] args) {  
+        bubble();  
+//      selection();  
+//      insertion();  
+//      quickSort(0, list.length -1);  
+//      shell();  
+        for (int x:list)  
+            System.out.print(x+" ");  
+    }  
+  
+}  
+{% endhighlight %}
+
+快速排序的总体思想非常直接了当，并且实用效果也不错，下面是另一种不同的实现方式：
+
+{% highlight java %}
+import java.util.Random;  
+  
+public class QuickSortTest {  
+    private static final Random RND = new Random();  
+    private static final int LIST_LEN = 16;  
+    private int[] list = new int[LIST_LEN];  
+      
+    public QuickSortTest(){  
+    }  
+      
+    /** 
+     * 生成List数组，为避免过多重复数据，使用n倍大的随机数空间 
+     */  
+    public void initList(){  
+        for (int i = 0 ; i <LIST_LEN; i++ ){  
+            list[i] = RND.nextInt(LIST_LEN * 3);  
+        }  
+    }  
+      
+    /** 
+     * 化分list，递归处理 
+     * @param low  
+     * @param high 
+     */  
+    public void qsort(int low, int high) {  
+        if (low < high) {  
+            int p = partition (low, high);  
+            qsort(low, p-1);  
+            qsort(p+1, high);  
+        }  
+    }  
+      
+    private int partition (int low, int high) {  
+        // 使用[low,high]之间的随机元素做比较的基准   low<=index<=high  
+        int index = low + RND.nextInt(high-low+1);  
+        int pivot = list[index];  
+          
+        swap (index, high);  
+        for (int i = index = low; i < high; i++){  
+            if (list[i] <= pivot ) {  
+                swap (i, index++);  
+            }  
+        }  
+        swap (index, high);  
+          
+        return index;  
+    }  
+      
+      
+    private void swap (int i, int j){  
+        int tmp = list[i];  
+        list[i] = list[j];  
+        list[j] = tmp;  
+    }  
+      
+    /** 
+     * print the list 
+     */  
+    private void printList(String msg) {  
+        System.out.println(msg);  
+        for (int i = 0; i < list.length ; i++) {  
+            System.out.print(list[i]);  
+            System.out.print("; ");  
+            if (i > 0 && i % 40 == 0) {  
+                System.out.print("\n");  
+            }  
+        }  
+        System.out.print("\n");  
+    }  
+      
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        QuickSortTest qst = new QuickSortTest();  
+        qst.initList();  
+        qst.printList("before sort:");  
+        qst.qsort(0, LIST_LEN -1);  
+        qst.printList("after sort:");  
+    }  
+}  
+
+
+
+Output: 
+before sort:  
+23; 13; 23; 9; 33; 10; 24; 25; 45; 44; 30; 1; 20; 12; 46; 47;   
+after sort:  
+1; 9; 10; 12; 13; 20; 23; 23; 24; 25; 30; 33; 44; 45; 46; 47;   
+{% endhighlight %}
