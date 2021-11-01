@@ -1,0 +1,73 @@
+---
+layout: post
+title:  "关于Java的“浅拷贝”和“深拷贝”"
+date:   2012-07-24 14:31:00 +0800
+categories: java
+---
+
+这是关于Java的clone， 一些知道的和不知道的。
+
+1. 调用Object类中clone()方法产生的效果是:先在内存中开辟一块和原始对象一样的空间，然后原样拷贝原始对象中的内容（也就是对clone对象各字段以=号赋值）。对基本数据类型，这样的操作是没有问题的，但对非基本类型变量，我们知道它们保存的仅仅是对象的引用，这也导致clone后的非基本类型变量和原始对象中相应的变量指向的是同一个对象。
+
+2. 对于非基本类型和数组（Java中的数组变量，无论是基本类型数组还是非基本类型数组，都被看作是一个引用，指向实际分配的内存空间），都需要做深度clone，如果需要的话。
+
+3. 使用new来对非基本类型和数组分配新空间，如下例:
+{% highlight java %}
+/** 
+* Get a copy of board[][] 
+*/  
+public byte[][] newCopyOfBoard() {  
+    byte[][] b = new byte[BOARD_HEIGHT][BOARD_WIDTH];  
+    for (int y = 0; y < BOARD_HEIGHT; y++) {  
+        for (int x = 0; x < BOARD_WIDTH; x++) {  
+            b[y][x] =boardArea[y][x] ;  
+        }  
+    }  
+    return b;  
+}  
+
+/** 
+* Board object Clone for AB search 
+*/  
+public Object clone() {  
+    Board bclone = null;  
+    try {  
+        bclone = (Board) super.clone();  
+        bclone.boardArea = this.newCopyOfBoard();  
+    } catch (CloneNotSupportedException e) {  
+        e.printStackTrace();  
+    }  
+    return bclone;  
+}  
+{% endhighlight %}
+
+
+4. 关于如何实现Clone，需要知道：
+a) 类需要实现Cloneable接口
+b) 重载clone方法
+c) 重载使用super.clone方法，并对类内部的引用类型均要做clone
+
+见下面的例子：
+{% highlight java %}
+public class Fridge implements Cloneable{  
+    public int size;   
+    public Cola cola = new Cola();   
+      
+    public Object clone () {  
+        Fridge fridge = null;   
+        try {  
+            fridge = (Fridge) super.clone();  
+            fridge.cola= (Cola) cola.clone();   
+        } catch (CloneNotSupportedException e) {  
+            e.printStackTrace();  
+        }  
+          
+        return fridge;   
+    }  
+}  
+{% endhighlight %}
+
+参考:
+http://www.ibm.com/developerworks/cn/java/l-jpointer/
+
+ 

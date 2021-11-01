@@ -1,0 +1,25 @@
+---
+layout: post
+title:  "Java线程编程学习笔记之二"
+date:   2009-06-11 17:23:00 +0800
+categories: java
+---
+
+"Java Thread Programming" by Paul Hyde
+
+(本书在Amazon.com 5星推荐，不幸的是成书较早，内容都是针对JDK1.2的，不知道有没有关于新版本的)
+
+Java线程编程学习笔记（二）
+
+26. Threads can also use thread-specific variables that keep a different value for different threads by using the classes ThreadLocal and InheritableThreadLocal.
+
+27. The Swing Toolkit isn't multithread-safe!
+
+28. Usually, we'll set frame visible in main() by
+frame.setVisible(true);
+After this method is invoked by main, it's no longer safe for any thread other than the event thread to make changes to the components.
+
+29. In Java, all threads belong to an instance of the ThreadGroup class.  A thread group has a name and some properties associated with it and can be used to facilitate the management of threads within it as a group. Thread groups allow the threads of the VM to be organized and can provide some inter-group security. A threadGroup can contain other ThreadGroups.
+
+30. Thread pooling saves the virtual machine the work of creating brand new threads for every short-lived task. In addition, it minimizes overhead associated with getting a thread started and cleaning it up after it dies. By creating a pool of threads, a single thread from the pool can be recycled over and over for different tasks.
+

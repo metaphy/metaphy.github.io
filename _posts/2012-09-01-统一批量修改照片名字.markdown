@@ -1,0 +1,200 @@
+---
+layout: post
+title:  "统一批量修改照片名字"
+date:   2012-09-01 14:00:00 +0800
+categories: java
+---
+在给小宝拍的照片中，有我手机拍的，有媳妇手机拍的，还有相机拍的，于是每个月给小宝选的30张照片中，文件命名很乱。现在根据文件修改属性，统一按时间戳命名，精确到秒。
+
+
+程序如下：
+（程序规模小，因此未考虑潜在的重名问题）
+{% highlight java %}
+import java.io.File;  
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+  
+public class UpdateFileName {  
+    private static final String dir = "C:/Documents and Settings/Administrator/My Documents/My Pictures/dir/";  
+  
+    public static void updateName() {  
+        File fdir = new File(dir);  
+        File[] list = fdir.listFiles();  
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");  
+          
+        for (File f : list) {  
+            if (f.isFile() && f.getName().toUpperCase().endsWith(".JPG")) {  
+                Date date = new Date(f.lastModified());  
+                String newName = sdf.format(date);  
+                  
+                System.out.print(f.getName() + "\t");  
+                System.out.println(newName + ".jpg");  
+  
+                f.renameTo(new File(dir + newName + ".jpg"));  
+            }  
+        }  
+    }  
+  
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        updateName();  
+    }  
+}  
+{% endhighlight %}
+-------------------------------------------------------
+即使就是今天，还是遇到了同名的问题，可见，作为一个合格而严谨的代码工，一定不能心存任何侥幸。程序更新如下，对于同一秒拍摄的照片，使用毫秒级的时间戳加6位随机整数来命名，以此解决上面程序的同名问题：
+{% highlight java %}
+import java.io.File;  
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+import java.util.HashMap;  
+import java.util.Random;  
+  
+public class UpdateFileName {  
+    private static final String PROCESS_DIR = "C:/Documents and Settings/Administrator/My Documents/My Pictures/dir/";  
+    private static final Random RANDOM = new Random();  
+      
+    /** 
+     * update the picture file names 
+     */  
+    public static void updateName() {  
+        File fdir = new File(PROCESS_DIR);  
+        File[] list = fdir.listFiles();  
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");  
+          
+        // 需要考虑重名文件问题  
+        HashMap<String, Integer> fileAllNames = new HashMap<String, Integer>();  
+        SimpleDateFormat sdfAnother = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss.SSS");  
+          
+        for (File f : list) {  
+            if (f.isFile() && f.getName().toUpperCase().endsWith(".JPG")) {  
+                Date date = new Date(f.lastModified());  
+                String newName = sdf.format(date);  
+                  
+                if (fileAllNames.containsKey(newName) ){ // 有重名的  
+                    newName = sdfAnother.format(date);  
+                    int rint = RANDOM.nextInt(999999-100000+1)+100000 ; // get a number between [a,b]  
+                    newName = newName + "."+ String.valueOf(rint);  
+                }  
+                  
+                fileAllNames.put(newName, 1);  
+                  
+                System.out.print(f.getName() + "\t\t\t");  
+                System.out.println(newName + ".jpg");  
+  
+                boolean succeed = f.renameTo(new File(PROCESS_DIR + newName + ".jpg"));  
+                  
+                if (!succeed) {  
+                    System.err.println("Rename failed: New File Name - " + newName);  
+                }  
+            }  
+        }  
+    }  
+       
+  
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        updateName();  
+    }  
+}  
+
+{% endhighlight %}
+-------------------------------------------------------
+程序再次更新，源于变态的apple使用iTunes导出文件，导致modified date time跟拍摄时间不一致。下面程序读取Exif信息做为拍摄时间，需要导入外部JAR包 metadata-extractor-2.4.0-beta-1.jar
+
+{% highlight java %}
+import java.io.File;  
+import java.util.HashMap;  
+import java.util.Random;  
+  
+import com.drew.imaging.jpeg.JpegMetadataReader;  
+import com.drew.imaging.jpeg.JpegProcessingException;  
+import com.drew.metadata.Directory;  
+import com.drew.metadata.Metadata;  
+import com.drew.metadata.MetadataException;  
+import com.drew.metadata.exif.ExifDirectory;  
+  
+public class UpdateJPGNameWithTimeStamp {  
+    private static final String PROCESS_DIR = "C:/Users/IBM_ADMIN/Pictures/11/";  
+    private static final Random RANDOM = new Random();  
+    private static String model = "";  
+  
+    public static String findEXIFDateTime(File jpegFile) {  
+        Metadata metadata;  
+        try {  
+            metadata = JpegMetadataReader.readMetadata(jpegFile);  
+            Directory exif = metadata.getDirectory(ExifDirectory.class);  
+            String newname = exif  
+                    .getDescription(ExifDirectory.TAG_DATETIME_ORIGINAL);  
+            // System.out.println(newname);  
+            if (newname!=null && newname.contains(":")){  
+                newname = newname.replaceFirst(":", "-");  
+                newname = newname.replaceFirst(":", "-");  
+                newname = newname.replaceFirst(":", ".");  
+                newname = newname.replaceFirst(":", ".");  
+                newname = newname.replaceFirst(":", ".");  
+            }  
+            model = exif.getDescription(ExifDirectory.TAG_MODEL);  
+            // System.out.println(exif.getDescription(ExifDirectory.TAG_EXIF_VERSION));  
+            return newname;  
+        } catch (JpegProcessingException e) {  
+            e.printStackTrace();  
+        } catch (MetadataException e) {  
+            e.printStackTrace();  
+        }  
+  
+        return null;  
+    }  
+  
+    public static void updateAll() {  
+        File fdir = new File(PROCESS_DIR);  
+        File[] list = fdir.listFiles();  
+        // 需要考虑重名文件问题  
+        HashMap<String, Integer> fileAllNames = new HashMap<String, Integer>();  
+  
+        for (File f : list) {  
+            if (f.isFile() && f.getName().toUpperCase().endsWith(".JPG")) {  
+                String newName = findEXIFDateTime(f);  
+                  
+                if (newName == null || newName.equals("")) {  
+                    continue;  
+                }  
+                  
+                if (fileAllNames.containsKey(newName + ".jpg")) { // 有重名的  
+                    int rint = RANDOM.nextInt(999999 - 100000 + 1) + 100000;  
+                    newName = newName + "." + String.valueOf(rint);  
+                }  
+                  
+                newName = newName + ".jpg";  
+                fileAllNames.put(newName, 1);  
+  
+                System.out.print("Old name: " + f.getName() + "\t");  
+                System.out.print("New name: " + newName + "\t");  
+                System.out.println("by " + model);  
+  
+                boolean succeed = f.renameTo(new File(PROCESS_DIR + newName));  
+  
+                if (!succeed) {  
+                    System.err.println("Rename failed: New File Name - "  
+                            + newName);  
+                }  
+            }  
+        }  
+        System.out.println("Done! Totally updated " + fileAllNames.keySet().size() );  
+    }  
+  
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        UpdateJPGNameWithTimeStamp.updateAll();  
+    }  
+}  
+
+{% endhighlight %}
+
+ 

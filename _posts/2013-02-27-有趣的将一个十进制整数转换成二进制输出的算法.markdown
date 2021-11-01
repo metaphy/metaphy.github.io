@@ -1,0 +1,61 @@
+---
+layout: post
+title:  "有趣的将一个十进制整数转换成二进制输出的算法"
+date:   2013-02-27 00:20:00 +0800
+categories: java
+---
+原题是将一个十进制整数转换成二进制输出。
+
+分析：任何数可以表达为： n = (n / div )* div + n % div
+这使用了Java中2个整数相除，结果仍是整数的特点。最先得到的余数是低位的，然后位数逐渐增加，直到n/div等于0为止，这里的div是2。代码实现如下：
+
+
+{% highlight java %}
+import java.util.Scanner;  
+import java.util.Stack;  
+  
+public class IntDecimal2Binary {  
+  
+    /** Decimal integer -> binary integer 
+     *  0 < decimal <= Integer.MAX_VALUE 
+     * @param decimal integer 
+     * @return binary integer 
+     */  
+    public static String getBinary(int decimal) {  
+        Stack<String> stack = new Stack<String>();  
+          
+        while (decimal != 0) {  
+            stack.push(String.valueOf(decimal % 2));  
+            decimal /= 2;  
+        }  
+  
+        StringBuilder sb = new StringBuilder();  
+        while (!stack.isEmpty()) {  
+            sb.append(stack.pop());  
+        }  
+        return sb.toString();  
+    }  
+  
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        while (true) {  
+            System.out.print("Input an Decimal Integer range (0, 2147483647]: ");  
+            Scanner scanner = new Scanner(System.in);  
+            int dec = 0;   
+            try {  
+                dec = scanner.nextInt();  
+            } catch (Exception e) {  
+                System.out.println("-> Cannot understand or out of range!");  
+            }  
+              
+            if (dec > 0){  
+                System.out.println("-> Binary: " + getBinary(dec));  
+            } else {  
+                System.out.println("-> Out of range!");  
+            }  
+        }  
+    }  
+}   
+{% endhighlight %}

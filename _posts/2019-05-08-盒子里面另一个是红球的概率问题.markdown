@@ -1,0 +1,55 @@
+---
+layout: post
+title:  "盒子里面另一个是红球的概率问题"
+date:   2019-05-08 09:27:00 +0800
+categories: java
+--- 
+问题如下： 
+有三个盒子，其中一个里面是两个红球，一个里面是两个蓝球，一个里面一红球一蓝球。小明从一个盒子取出一个球，是个红球，请问，这个盒子里另外一个球也是红球的概率是多少？
+ 
+
+这个问题是在抖音上看到的，下面的comments评论为了答案吵翻了天。我先不说答案。作为程序员，最简单暴力的方式就是用数据模拟一下，看看是多少。下面是模拟程序：
+ {% highlight java %}
+import java.util.Random;  
+  
+public class P {  
+    final static int[][] BOX = {      
+            {0, 0},  
+            {0, 1},  
+            {1, 1}   
+    };  
+      
+    public static void main(String[] args) {  
+        Random r = new Random();   
+        int touchBox;   // which box to fetch  
+        int touchBall;  // which ball to fetch  
+        int touchTimes = 10000000;        
+        int firstTouchRed = 0;   
+        int anotherIsAlsoRed = 0;  
+          
+        for(int i=0; i< touchTimes; i++) {  
+            touchBox = r.nextInt(3);    //index: 0, 1, 2  
+            touchBall = r.nextInt(2);   //index: 0, 1  
+              
+            if (BOX[touchBox][touchBall] == 0) {    // a student randomly touched a ball and it is Red(0)  
+                firstTouchRed ++;   
+                int another = touchBall == 0? 1:0;   
+  
+                if (BOX[touchBox][another] == 0) {  // another ball is also Red  
+                    anotherIsAlsoRed ++;  
+                }  
+            }  
+        }  
+        System.out.println("第一次拿出的是红球的次数：" + firstTouchRed);  
+        System.out.println("第二次拿出的刚好也是红球的次数：" + anotherIsAlsoRed);  
+        System.out.println("P = " + (anotherIsAlsoRed * 1.0 / firstTouchRed));   
+    }  
+}  
+ {% endhighlight %}
+
+某次的运行结果：
+
+第一次拿出的是红球的次数：4996935  
+第二次拿出的刚好也是红球的次数：3331421  
+P = 0.6666928827371178 
+

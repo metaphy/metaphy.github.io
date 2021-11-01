@@ -1,0 +1,14 @@
+---
+layout: post
+title:  "Notepad++删空行"
+date:   2015-03-19 17:04:00 +0800
+categories: scripts
+---
+ 
+{% highlight shell %}
+Find:^[ \t]*$\r?\n
+Replace:
+Search Mode: Regular expression
+{% endhighlight %}
+
+v6.6.1 试用没问题。

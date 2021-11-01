@@ -1,0 +1,85 @@
+---
+layout: post
+title:  "关于Java的UUID"
+date:   2012-08-30 18:40:00 +0800
+categories: java
+---
+UUID或者UNID或者UID，是一个统一唯一标识，可以用来标记文档、数据或其它需要唯一标识的东西。Java 5.0内置UUID的实现，见java.util.UUID. 下面代码是找到的2种实现方式，随手测了一下，两者时间效率居然出奇的相似，在10000000次循环中，均在660秒左右。
+
+{% highlight java %}
+import java.math.BigInteger;  
+import java.util.Random;  
+import java.util.UUID;  
+  
+public class UUIDTest {  
+    private static UUID uid = null;  
+    private static final Random RANDOM = new Random();  
+      
+    public static String getUUID() {  
+        uid = UUID.randomUUID();   
+        String idstr = uid.toString().replace("-", "");  
+        return idstr.toUpperCase();  
+    }  
+      
+      
+    public static String generateGUID(){  
+        return new BigInteger(165, RANDOM).toString(36).toUpperCase();  
+    }  
+      
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        int cycles = 100000000;   
+          
+        long start = System.currentTimeMillis();  
+        for (int i = 0; i < cycles; i++) {  
+            //System.out.println(getUUID());  
+            getUUID();  
+        }  
+        long end = System.currentTimeMillis();  
+        String msg = "Time(ms) of getUUID() " + cycles + " times: " ;  
+        System.out.println (msg + (end - start));  
+          
+          
+        long start1 = System.currentTimeMillis();  
+        for (int i = 0; i < cycles; i++) {  
+            //System.out.println(generateGUID());  
+            generateGUID();  
+        }  
+        long end1 = System.currentTimeMillis();  
+        msg = "Time(ms) of generateGUID() " + cycles + " times: " ;  
+        System.out.println (msg + (end1 - start1));  
+    }  
+}  
+{% endhighlight %}
+
+2者所生成ID字串如下：
+{% highlight java %}
+FB0F88715B564691A85F28DBFDD57D90
+E50999DA27624D7E81B89C47DF02DA92
+E601B3C99AC4490E97EA0174860EEFDF
+839DF94E497E45D09D5D7F34C531511F
+54459B4DACF94097962A1C6017A35882
+6A6CAF5667F74C24A28141CD287C44BE
+7DF3E7F386934C4E9842E980E9E4C652
+3370A0549E3C4C5EA3A5EFC53E5DC9B6
+563F56BA980F43D3A07DF58B9F95F2EC
+0968563C99E046B9944DFDD36CDDF5E2
+GV9VQMTJC4NDFV5IB7N5IDWABQWF8M4M
+LD0U9UKFPGG9LKKYHEWJSJ40OC57JHIQ
+J9KTPM0Y9676256UNQTO7HFQG0G0CBDK
+H0B4IVYNO99N918YIJ12PKA4T0R6P394
+CTYE9DTF9IBUXXOR1SYCJYCRXD9H6KO9
+2ZQ1CH3MGP5M3AOTFH1VJ3ZQ8M0CH2I5
+MDGHQLHQ34A0Q9JNJ7S6WFAN8YV0M652
+HVC2R84PT2ZKABL2FSSR84K9N5IG98WP
+MGZ3NZJ5RS51KCL12KHLGURXCHZK8YNK
+129RZPH0UPQO8SMCZZJFTY37G47T19KL
+{% endhighlight %}
+
+时间测试结果：
+{% highlight java %}
+Time(ms) of getUUID() 100000000 times: 669516
+Time(ms) of generateGUID() 100000000 times: 663656
+{% endhighlight %}

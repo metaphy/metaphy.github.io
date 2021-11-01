@@ -1,0 +1,203 @@
+---
+layout: post
+title:  "有趣的统计英文字母频率的例子"
+date:   2013-03-01 01:13:00 +0800
+categories: java
+---
+统计的是英文版"悲惨世界"，代码如下，使用ascii值做数组下标直接赋值：
+
+{% highlight java %}
+import java.io.BufferedReader;  
+import java.io.File;  
+import java.io.FileReader;  
+import java.io.IOException;  
+import java.text.DecimalFormat;  
+  
+public class EnglishAlphaBetaStatics {  
+    public static final String EN_FOLDER = "C:/resources/Books/English/Les Miserables.txt";  
+    private static final int ASCII_START = 33; // ASCII from 33; ignore the  
+                                                // space  
+    private static final int ASCII_LENGTH = 94;  
+  
+    private int[] result = new int[ASCII_LENGTH];  
+    private int total = 0;  
+  
+    /** 
+     * Handle one English fiction 
+     *  
+     * @param file 
+     * @throws IOException 
+     */  
+    public void handleOneFile(File file) throws IOException {  
+        if (file == null)  
+            throw new NullPointerException();  
+  
+        BufferedReader in = new BufferedReader(new FileReader(file));  
+        String line;  
+  
+        while ((line = in.readLine()) != null) {  
+            for (int i = 0; i < line.length(); i++) {  
+                char c = line.charAt(i);  
+  
+                if (c >= ASCII_START && c < ASCII_START + ASCII_LENGTH) {  
+                    result[c - ASCII_START] += 1;  
+                    total++;  
+                } else {  
+  
+                }  
+            }  
+        }  
+        in.close();  
+    }  
+  
+    /** 
+     * Print the statics result 
+     */  
+    public void printResult() {  
+        // For sorting  
+        int[] abc = new int[ASCII_LENGTH];  
+        for (int i = 0; i < abc.length; i++) {  
+            abc[i] = ASCII_START + i;  
+        }  
+  
+        // Sorting  
+        for (int i = 0; i < result.length; i++) {  
+            for (int j = 0; j < result.length - 1 - i; j++) {  
+                if (result[j] < result[j + 1]) {  
+                    int tmp = result[j];  
+                    result[j] = result[j + 1];  
+                    result[j + 1] = tmp;  
+                    // swap the characters  
+                    tmp = abc[j];  
+                    abc[j] = abc[j + 1];  
+                    abc[j + 1] = tmp;  
+                }  
+            }  
+        }  
+  
+        // Format  
+        DecimalFormat df = new DecimalFormat("#.######");  
+  
+        System.out.println("Total characters: " + total);  
+        System.out.println("Char\tNumber\t%");  
+        System.out.println("-----------------------------------");  
+        for (int i = 0; i < result.length; i++) {  
+            char c = (char) abc[i];  
+            double rate = result[i] * 100.0 / total;  
+            System.out.println(c + "\t" + result[i] + "\t" + df.format(rate)  
+                    + "%");  
+        }  
+    }  
+  
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) throws IOException {  
+        EnglishAlphaBetaStatics eab = new EnglishAlphaBetaStatics();  
+        eab.handleOneFile(new File(EN_FOLDER));  
+        eab.printResult();  
+    }  
+}  
+{% endhighlight %}
+
+我以为会多慢呢，没想到瞬间完成，统计结果如下：
+{% highlight java %}
+Total characters: 2800496  
+Char    Number  %  
+
+
+e   345891  12.351062%  
+t   235280  8.401369%  
+a   211330  7.546163%  
+o   190799  6.813043%  
+h   180302  6.438217%  
+n   176170  6.290671%  
+i   174552  6.232896%  
+s   166855  5.958052%  
+r   152896  5.459604%  
+d   113123  4.039392%  
+l   102527  3.66103%  
+u   70975   2.534372%  
+c   66061   2.358904%  
+m   59036   2.108055%  
+w   56513   2.017964%  
+f   56476   2.016643%  
+,   51714   1.846601%  
+g   48633   1.736585%  
+p   41978   1.498949%  
+y   39999   1.428283%  
+b   36215   1.293164%  
+.   32322   1.154153%  
+v   25400   0.906982%  
+k   14724   0.525764%  
+"   14616   0.521908%  
+T   12625   0.450813%  
+-   10222   0.365007%  
+I   9530    0.340297%  
+A   6890    0.246028%  
+H   6553    0.233994%  
+M   6435    0.229781%  
+;   6204    0.221532%  
+E   4313    0.154008%  
+S   4292    0.153259%  
+C   4262    0.152187%  
+x   3882    0.138618%  
+'   3852    0.137547%  
+!   3690    0.131762%  
+O   3593    0.128299%  
+j   3495    0.124799%  
+B   3476    0.124121%  
+W   3316    0.118408%  
+?   3094    0.11048%  
+R   3057    0.109159%  
+P   3047    0.108802%  
+F   2811    0.100375%  
+N   2751    0.098233%  
+:   2553    0.091162%  
+J   2536    0.090555%  
+q   2535    0.09052%  
+G   2401    0.085735%  
+L   2296    0.081985%  
+V   2021    0.072166%  
+z   1960    0.069988%  
+D   1735    0.061953%  
+Y   1147    0.040957%  
+U   768 0.027424%  
+1   687 0.024531%  
+K   600 0.021425%  
+8   422 0.015069%  
+*   303 0.01082%  
+X   262 0.009355%  
+2   243 0.008677%  
+3   237 0.008463%  
+`   227 0.008106%  
+5   203 0.007249%  
+[   197 0.007034%  
+]   197 0.007034%  
+0   195 0.006963%  
+4   155 0.005535%  
+7   142 0.005071%  
+6   133 0.004749%  
+Q   121 0.004321%  
+9   113 0.004035%  
+(   95  0.003392%  
+)   95  0.003392%  
+Z   58  0.002071%  
+_   40  0.001428%  
+|   36  0.001285%  
+{   2   0.000071%  
+}   2   0.000071%  
++   1   0.000036%  
+/   1   0.000036%  
+#   0   0%  
+$   0   0%  
+%   0   0%  
+&   0   0%  
+<    0   0%  
+=   0   0%  
+>    0   0%  
+@   0   0%  
+\   0   0%  
+^   0   0%  
+~   0   0%  
+{% endhighlight %}

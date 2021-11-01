@@ -1,0 +1,129 @@
+---
+layout: post
+title:  "随机密码生成"
+date:   2015-09-10 10:19:00 +0800
+categories: java
+--- 
+
+{% highlight java %}  
+import java.util.Random;  
+  
+public class RandomPassword {  
+    private int length = 8;     // password length  
+    private int numLen = 2;     // count of numbers  
+    private int nonABNumLen = 1;// count of special character  
+  
+    /** 
+     * get an alphabeta 
+     * @return 
+     */  
+    private char getAB() {  
+        Random rand = new Random();  
+        int ri = rand.nextInt(52);  
+        char c = 0;  
+        if (ri < 26) {  
+            c = (char) (65 + ri);  
+        } else {  
+            c = (char) (97 + ri - 26);  
+        }  
+        return c;  
+    }  
+  
+    /** 
+     * get a num 
+     * @return 
+     */  
+    private char getNum() {  
+        Random rand = new Random();  
+        int ri = rand.nextInt(10);  
+        char c = (char) (48 + ri);  
+        return c;  
+    }  
+  
+    /** 
+     * get a non num / non abc char 
+     * @return 
+     */  
+    private char getNonABNum() {  
+        Random rand = new Random();  
+        int total = (47 - 32) + (64 - 57) + (96 - 90) + (126 - 122);    //total nonABNUM characters  
+        int ri = rand.nextInt(total);  
+        char c = 0;   
+        if (ri < (47 - 32)) {  
+            c = (char) (ri + 32 + 1);   
+        } else if (ri < (47 - 32)+(64 - 57)) {  
+            c = (char) (ri - (47 - 32) + 57 + 1);   
+        } else if (ri < (47 - 32)+(64 - 57) + (96 - 90)) {  
+            c = (char) (ri - (47 - 32) -(64 - 57) + 90 + 1 );  
+        } else {  
+            c = (char) (ri - (47 - 32) -(64 - 57) - (96 - 90) + 122 + 1 );  
+        }  
+        return c;  
+    }  
+  
+    /** 
+     * Generate the password chars array 
+     */  
+    public String password() {  
+        char[] pwd = new char[length];  
+          
+        // generate the pwd chars  
+        for (int i = 0; i < length; i++ ) {   
+            if (i < length -numLen -nonABNumLen) {  
+                pwd[i] = getAB();   
+            } else if (i < length -nonABNumLen ) {  
+                pwd[i] = getNum();   
+            } else {  
+                pwd[i] = getNonABNum();   
+            }  
+        }  
+          
+        // randomly shuffle pwd char array - Fisher–Yates shuffle  
+        Random rand = new Random();  
+        for (int i = length - 1; i > 0; i --) {   
+            int j = rand.nextInt(i + 1);  
+            // swap char[i] and char[j]  
+            char c = pwd[j];  
+            pwd[j] = pwd[i];   
+            pwd[i] = c;   
+        }  
+        return new String(pwd);  
+    }  
+      
+    /** 
+     * Test 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        RandomPassword rp = new RandomPassword ();  
+        for (int i = 0; i< 20; i++) {  
+            System.out.println ("Random Password: " + rp.password());  
+        }  
+    }  
+}  
+{% endhighlight %}
+
+某次运行结果：
+
+{% highlight java %}
+Random Password: "f1iiu9E  
+Random Password: X:9LT9UX  
+Random Password: BO7CQ'U4  
+Random Password: Esp^N00r  
+Random Password: f51BpT^D  
+Random Password: d2)mRPy0  
+Random Password: m0Ww^8aa  
+Random Password: FwV)RQ22  
+Random Password: 1_9hRtSt  
+Random Password: Q9m1YMM=  
+Random Password: 7cN#Jo7o  
+Random Password: 3oa7s^OO  
+Random Password: i(OB6Xz8  
+Random Password: VL6h2z^j  
+Random Password: (eVqu9p9  
+Random Password: ~DGGS80o  
+Random Password: [2lp4xlL  
+Random Password: #vs0sHv9  
+Random Password: Lp0XX2]L  
+Random Password: (POo9jC7
+{% endhighlight %}
