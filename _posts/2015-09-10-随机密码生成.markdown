@@ -5,7 +5,7 @@ date:   2015-09-10 10:19:00 +0800
 categories: java
 --- 
 
-{% highlight java %}  
+{% highlight java %}
 import java.util.Random;  
   
 public class RandomPassword {  
