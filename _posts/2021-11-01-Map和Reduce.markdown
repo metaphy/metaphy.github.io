@@ -2,7 +2,7 @@
 layout: post
 title: "Map和Reduce"
 date: 2021-11-01 22:33:00 +0800
-categories: scala
+categories: scala-spark
 --- 
 
 这半年多来，对Scala/Spark接触很多，而越学习，越感到之前的无知，所谓“学然后知不足”。函数式编程的思维方式和之前Java的或者说面向对象的思维方式有很大不同，而思维惯性又难克服，必须有意识地使用这样风格去思考。
