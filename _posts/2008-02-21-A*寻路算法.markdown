@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "A*寻路"
+title:  "A*寻路算法"
 date:   2008-02-21 12:37:00 +0800
 categories: java
 ---
