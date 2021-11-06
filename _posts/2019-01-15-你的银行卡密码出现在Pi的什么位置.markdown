@@ -47,7 +47,7 @@ func piall01() {
 	}
 
 	// Open the file PI
-	data, err := ioutil.ReadFile("/Users/peter/Work/pi-billion.txt")
+	data, err := ioutil.ReadFile("/Users/user/Work/pi-billion.txt")
 	check(err)
 
 	// result write to
@@ -84,7 +84,7 @@ func piall02() {
 	}
 
 	// Open the file PI
-	file, err := os.Open("/Users/peter/Work/pi-billion.txt")
+	file, err := os.Open("/Users/user/Work/pi-billion.txt")
 	check(err)
 	defer file.Close()
 

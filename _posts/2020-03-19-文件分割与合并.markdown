@@ -26,8 +26,8 @@ import java.util.Random;
   
 public class FileSplit {  
     private static final boolean SPLIT_ACTION = true;   
-    private static final String FOLDER = "/Users/peter/Documents/abakup/";  
-//  private static final String FOLDER = "/Users/peter/Desktop/fstest/";  
+    private static final String FOLDER = "/Users/user/Documents/abakup/";  
+//  private static final String FOLDER = "/Users/user/Desktop/fstest/";  
     private static final String[] FILES = { "a", "b", "c","d"};  
     private static final int BLOCK_SIZE = 1024 * 1024; // 1M  
     private static final int SPLIT_TO_FOLDERS_COUNT = 10;   
