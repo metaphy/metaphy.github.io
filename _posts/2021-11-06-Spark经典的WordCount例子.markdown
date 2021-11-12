@@ -6,7 +6,7 @@ categories: scala-spark
 --- 
 
 这是经典的Spark的WordCount的例子，演示了Spark分布式数据集的诸多方面，以及Map/Reduce的用法。
-
+* 例一
 {% highlight scala %}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
@@ -19,8 +19,8 @@ object WordCount {
 
     val words = textFile
       .flatMap(line => line.split(" "))
-      .map((_, 1))    // map(word => (word, 1))  : each word to a (word,1) tuple
-      .reduceByKey(_ + _) // reduced by key, the result will be a list of tuple
+      .map((_, 1))    // map(word => (word, 1))  : each word to a (word,1) pair
+      .reduceByKey(_ + _) // reduced by key, the result will be a list of pair
 
     words.saveAsTextFile("file:///tmp/saved_word_count")  // RDD will be saved in partitions
 
@@ -52,3 +52,20 @@ user@/tmp/saved_word_count $ cat part-00000
 ...
 {% endhighlight %}
 
+
+* 例二
+{% highlight scala %}
+object WordCount2 extends App{
+  val spark: SparkSession = SparkSession.builder().master("local[*]").appName("QuickStart").getOrCreate()
+  import spark.implicits._
+
+  val textFile = spark.read.textFile("file:///tmp/WordCount.txt")
+
+  val wordCounts = textFile.flatMap(line => line.split(" ")).groupByKey(identity).count()
+  // an array of the (word, count) pair.  The amazing thing is the .groupByKey and .count combined with the pair 
+
+  wordCounts.toDF.show(200)
+
+  spark.stop
+}
+{% endhighlight %}
