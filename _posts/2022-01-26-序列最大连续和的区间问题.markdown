@@ -141,7 +141,7 @@ object MaxRegion extends App{
 }
 {% endhighlight %}
 
-结果为：
+结果如下：
 {% highlight scala %}
 K  - max sum value: 11165; max region: [132804, 137146]
 K2 - max sum value: 11165; max region: [132804, 137146]
