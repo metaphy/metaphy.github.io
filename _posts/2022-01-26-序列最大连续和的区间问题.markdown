@@ -13,13 +13,12 @@ categories: scala-spark
 
 1. 如果整个序列都是负数或零，则最大的那个数就是总和最大的
 2. 扫描整个序列时，从第一个正数开始，计算sum，直到sum < 0， 到此为止，会有一个max1，并且max1显然>0。此处不需要继续计算了，因为继续计算，sum加上后面的，将会拖累后面的，记住现在sum已经是负
-3. 到上一步的sum<0后，重新扫描，继续从第一个正数开始，重复第二步，这样你会找到一些max2, max3, ... maxn
-4. Max 则是 max1, max2, ... maxn 的最大值
+3. 到上一步的sum<0后，继续往下扫描，仍然忽略负数和零，从第一个正数开始，重复第二步，这样你会找到一些max2, max3, ... maxn
+4. Max 则是 max1, max2, ... maxn的最大值
 
 下面例子重点实现这一种O(K)，为了验证和比较，也同时实现了第二种O(K^2)。我用了20万个整数做试验，第二种耗时比第四种多上千倍。
 
-{% highlight scala %} 
-
+{% highlight scala %}
 object MaxRegion extends App{
   var nums: Array[Int] = Array()
 
@@ -142,8 +141,8 @@ object MaxRegion extends App{
 }
 {% endhighlight %}
 
-{% highlight scala %} 
 结果为：
+{% highlight scala %}
 K  - max sum value: 11165; max region: [132804, 137146]
 K2 - max sum value: 11165; max region: [132804, 137146]
 Done! performanceK: 11 ms; performanceK2: 22611 ms
