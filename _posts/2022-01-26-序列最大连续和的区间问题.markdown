@@ -1,0 +1,150 @@
+---
+layout: post
+title: "序列最大连续和的区间问题"
+date: 2022-01-26 10:15:00 +0800
+categories: scala-spark
+--- 
+
+问题如下： 给定一个实数序列，设计一个最有效算法，找到一个总和最大的区间。 这个问题也被称为总和最大区间问题。
+
+读吴军老师的《算法之魂》，里面P35页有大概这么一个问题，颇为好奇，遂尝试解决。书中给出O(N^3), O(N^2), O(NlogN), O(N)共四种时间复杂度的算法，其中第二种是最容易想到的；第三种，分治方法，书上给的步骤并不正确，所以不尝试了；重点说一下第四种。
+
+第四种算法的时间复杂度O(N)，是最有效的，也是理论上最高效的一个算法，因为无论如何，想解决这个问题必须扫描整个序列至少一次。书上给的解释颇为罗嗦，但整个算法其实非常简单。
+
+1. 如果整个序列都是负数或零，则最大的那个数就是总和最大的
+2. 扫描整个序列时，从第一个正数开始，计算sum，直到sum < 0， 到此为止，会有一个max1，并且max1显然>0。此处不需要继续计算了，因为继续计算，sum加上后面的，将会拖累后面的，记住现在sum已经是负
+3. 到上一步的sum<0后，重新扫描，继续从第一个正数开始，重复第二步，这样你会找到一些max2, max3, ... maxn
+4. Max 则是 max1, max2, ... maxn 的最大值
+
+下面例子重点实现这一种O(K)，为了验证和比较，也同时实现了第二种O(K^2)。我用了20万个整数做试验，第二种耗时比第四种多上千倍。
+
+{% highlight scala %} 
+
+object MaxRegion extends App{
+  var nums: Array[Int] = Array()
+
+  for (i <- 0.until(200000)) {
+    nums +:= scala.util.Random.nextInt(200) - 100    // numbers of [-100, 100]
+  }
+
+  val start1 = System.currentTimeMillis()
+  val performanceK = MaxRegion.findMaxRegion (nums)
+  val start2 = System.currentTimeMillis()
+  val performanceKsquare = MaxRegion.findMaxRegion2(nums)
+  val start3 = System.currentTimeMillis()
+
+  if (performanceK._1 != performanceKsquare._1 || performanceK._2 != performanceKsquare._2 || performanceK._3 != performanceKsquare._3 ) {
+    println(s"Error: ${nums.mkString(", ")}")
+  }
+
+  println(s"Done! performanceK: ${start2-start1} ms; performanceK2: ${start3-start2} ms" )
+
+  /*
+  val nums0 : Array[Int] = Array(30, 39,  78,  9,  2,  32)
+  nums0.foreach(println)
+  MaxRegion.findMaxRegion (nums0)
+  MaxRegion.findMaxRegion2(nums0)
+
+  val nums1 : Array[Int] = Array(0, -39,  78,  -79,  57, 32)
+  nums1.foreach(println)
+  MaxRegion.findMaxRegion (nums1)
+  MaxRegion.findMaxRegion2(nums1)
+
+  val nums2 : Array[Int] = Array(48, -53,  49,  -84,  54,  -83)
+  nums2.foreach(println)
+  MaxRegion.findMaxRegion (nums2)
+  MaxRegion.findMaxRegion2(nums2)
+
+  val nums3 : Array[Int] = Array(-3, 60,  -75,  -66,  -2,  28)
+  nums3.foreach(println)
+  MaxRegion.findMaxRegion (nums3)
+  MaxRegion.findMaxRegion2(nums3)
+
+  val nums4 : Array[Int] = Array(-10, -33,  -75,  -66,  -2,  -28)
+  nums4.foreach(println)
+  MaxRegion.findMaxRegion (nums4)
+  MaxRegion.findMaxRegion2(nums4)
+
+  val nums5 : Array[Int] = Array(-10, -33,  -75,  -66,  1,  -28)
+  nums5.foreach(println)
+  MaxRegion.findMaxRegion (nums5)
+  MaxRegion.findMaxRegion2(nums5)   
+  */
+
+
+  def findMaxRegion(nums: Array[Int]): (Long, Int, Int) = {
+    var maxSum, jmax, maxA, maxB, maxAtmp, maxBtmp = 0
+    var tmpmax = Integer.MIN_VALUE
+    var start = false
+    var allNegative = true    // special case
+
+    for (i <- nums.indices) {
+      if(allNegative) {
+        if (nums(i) > tmpmax) {
+          tmpmax = nums(i)
+          maxAtmp = i
+          maxBtmp = i
+        }
+      }
+
+      if(nums(i) > 0 && !start) {
+        start = true
+        allNegative = false
+        maxAtmp = i
+        maxBtmp = i
+        tmpmax = nums(i)
+        jmax = 0
+      }
+
+      if (start) {
+        jmax = jmax + nums(i)
+
+        if(jmax >= tmpmax) {
+          tmpmax = jmax
+          maxBtmp = i
+        } else if(jmax <= 0) {
+          start = false
+        }
+      }
+
+      if(tmpmax > maxSum || allNegative) {
+        maxSum = tmpmax
+        maxA = maxAtmp
+        maxB = maxBtmp
+      }
+    }
+
+    println(s"K  - max sum value: $maxSum; max region: [$maxA, $maxB]")
+    (maxSum, maxA, maxB)
+  }
+
+
+  def findMaxRegion2(nums: Array[Int]): (Long, Int, Int) = {
+    var maxSum, jmax = 0L
+    var maxA, maxB = 0
+
+    for (i <- nums.indices) {
+      maxSum = if(i == 0) nums(0) else maxSum
+
+      for (j <- i.until(nums.length)) {
+        jmax = if(i == j) nums(j) else jmax + nums(j)
+
+        if(jmax > maxSum) {
+          maxA = i
+          maxB = j
+          maxSum = jmax
+        }
+      }
+    }
+    println(s"K2 - max sum value: $maxSum; max region: [$maxA, $maxB]")
+    (maxSum, maxA, maxB)
+  }
+}
+{% endhighlight %}
+
+{% highlight scala %} 
+结果为：
+K  - max sum value: 11165; max region: [132804, 137146]
+K2 - max sum value: 11165; max region: [132804, 137146]
+Done! performanceK: 11 ms; performanceK2: 22611 ms
+{% endhighlight %}
