@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ——— 读书，跑步，写程序
+title: ——— 去爱，去生活，去失败
 permalink: /about/
 ---
 
