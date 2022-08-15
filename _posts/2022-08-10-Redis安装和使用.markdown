@@ -1,0 +1,33 @@
+---
+layout: post
+title: "Redis安装和使用"
+date: 2022-08-10 21:00:00 +0800
+categories: redis
+--- 
+
+Redis是一个内存数据库（NoSQL数据库），可用作缓存，数据可以持久化到磁盘。
+
+Redis的安装非常简单，参考官方Linux安装文档，在本机Ubuntu下，执行以下命令即可：
+{% highlight scala %}
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+sudo apt-get update
+sudo apt-get install redis-stack-server
+{% endhighlight %}
+
+查看安装后的版本：
+{% highlight scala %}
+$ redis-server -v
+Redis server v=5.0.7 sha=00000000:0 malloc=jemalloc-5.2.1 bits=64 build=66bd629f924ac924
+{% endhighlight %}
+
+安装结束后，运行redis-cli 即可与server通信：
+{% highlight scala %}
+$ redis-cli
+127.0.0.1:6379> ping
+PONG
+127.0.0.1:6379> SET status "200 - Success"
+OK
+127.0.0.1:6379> GET status
+"200 - Success"
+{% endhighlight %}
