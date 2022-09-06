@@ -1,0 +1,40 @@
+---
+layout: post
+title: "Scala的类型归属(Type ascription)"
+date: 2022-09-06 22:28:10 +0800
+categories: scala-spark
+--- 
+
+Scala的代码有时确实可以写的很简洁，但如果对其中某些表达方式不熟悉的话，则不容易看懂。
+
+a : A 是Scala的类型归属指定，Type ascription， 这个很常见，在定义类型时候常用。 Seq() _ : * 这种写法是种特殊的类型指定，它的意思是把Seq 中的元素看作不定长参数 (varargs).
+
+举个栗子。
+
+{% highlight scala %}
+val ids = List(1, 2, 3, 4)
+val drinks = List("Coke", "Beer", "Tea", "Water")
+
+val map = ids.zip(drinks).toMap
+
+// zip 的意思是把2个List的元素一对一Pair，变成元组 (1, "CoKe")这样的List
+// 2个List 如果不一样长，组合后的长度为较短的那个长度
+
+val listMap = ListMap(map.toSeq.sortBy(_._1) : _*)
+
+// map toSeq 后，又变成了之前的元组List，然后是按key 排序，就是按之前id 排序
+// Seq 之后加 : _*, 表示取这个Seq的元素之意，并且适配不定长度的元素个数。
+// 所以，上面这一句翻译翻译就是：  
+// val listMap = ListMap((1, "Coke"), (2,"Beer"), (3, "Tea"), (4, "Water")) 
+
+for((_, v) <- listMap) {
+    println(v)
+}
+// 各种饮料会严格按上面的id 排序顺序打印出来
+
+{% endhighlight %}
+
+
+
+
+
