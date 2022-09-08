@@ -7,7 +7,7 @@ categories: scala-spark
 
 Scala的代码有时确实可以写的很简洁，但如果对其中某些表达方式不熟悉的话，则不容易看懂。
 
-a : A 是Scala的类型归属指定，Type ascription， 这个很常见，在定义类型时候常用。 Seq() _ : * 这种写法是种特殊的类型指定，它的意思是把Seq 中的元素看作不定长参数 (varargs).
+a : A 是Scala的类型归属指定，Type ascription， 这个很常见，在定义类型时候常用。 seq : _* 这种写法是种特殊的类型指定，它的意思是把Seq中的元素看作不定长参数 (varargs).
 
 举个栗子。
 
