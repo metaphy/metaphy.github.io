@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "用Node.js起一个小的web server"
+date:   2020-03-20 10:10:20 +0800
+categories: Node.js
+--- 
+用Node.js起一个小的web server算是Node.js的基本操作了，老本行，下面的例子是启动一个小的server，可以然后可以进行文件传输。
+
+{% highlight javascript %}
+let http = require('http'),
+    fs = require('fs');
+
+http.createServer(function (request, response){
+    if (request.url === '/') {
+        response.writeHead(200, {"Content-Type":"text/plain"});
+        response.end("Hello, it's ready for downloading...");
+        return; 
+    }
+
+    let file = request.url.substring(1, request.url.length);
+
+    console.log(new Date().toISOString() + "\t" + file); 
+
+    fs.exists(file, function(exists){
+        if (exists) {
+            response.writeHead(200, {
+            "Content-Type": "application/octet-stream",
+            "Content-Disposition": "attachment; filename=" + file});
+            fs.createReadStream(file).pipe(response);
+        } else {
+            response.writeHead(400, {"Content-Type": "text/plain"});
+            response.end("ERROR: File does not exist - " + file);
+        }
+    });
+}).listen(8877);
+console.log('Running on 8877...');
+
+{% endhighlight %}
