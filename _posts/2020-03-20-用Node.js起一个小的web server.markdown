@@ -2,7 +2,7 @@
 layout: post
 title:  "用Node.js起一个小的web server"
 date:   2020-03-20 10:10:20 +0800
-categories: Node.js
+categories: Nodejs
 --- 
 用Node.js起一个小的web server算是Node.js的基本操作了，老本行，下面的例子是启动一个小的server，可以然后可以进行文件传输。
 

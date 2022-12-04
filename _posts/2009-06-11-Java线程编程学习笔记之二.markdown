@@ -2,7 +2,7 @@
 layout: post
 title:  "Java线程编程学习笔记之二"
 date:   2009-06-11 17:23:00 +0800
-categories: java
+categories: Java
 ---
 
 "Java Thread Programming" by Paul Hyde

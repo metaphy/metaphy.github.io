@@ -2,7 +2,7 @@
 layout: post
 title: "什么是Pi"
 date: 2021-04-02 14:06:00 +0800
-categories: javascript
+categories: Javascript
 --- 
 
 发一个之前学习HTML5和Javascript的code, 这个是在HTML5画布上，动态画出了一个滚动的圆形，演示Pi是圆的周长与直径的比值。HTML5 使用window.requestAnimationFrame()函数自动刷新画面，并且FPS能自适应浏览器的刷新率，比直接使用setInterval 这样的函数显示的效果更好，不会有丢帧或卡顿的现象。

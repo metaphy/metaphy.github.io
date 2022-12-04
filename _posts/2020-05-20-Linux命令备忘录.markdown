@@ -1,0 +1,55 @@
+---
+layout: post
+title:  "Linux命令备忘录"
+date:   2020-05-22 16:39:00 +0800
+categories: Linux
+--- 
+
+1. Shutdown
+	- `shutdown now`
+	- `shutdown -r now`
+	- `sudo shutdown -h now`
+
+2. Ubuntu System info:
+	- `lsb_release -a` 
+	- `cat /proc/version`
+	- `cat /proc/meminfo`
+	- `cat /proc/cpuinfo | grep cores | uniq`
+
+3. Disk:
+	- `df -h`
+	- `du -h --max-depth=1` 
+	
+4. Folder and File shortcut:
+	- `ln -s ~/Work/BackupProject ~/Desktop`
+	- `ln filea filea_shortcut`
+5. Group & Users:
+	- `cat /etc/group`
+	- `cat /etc/passwd`
+6. JAVA_HOME:
+	- `/usr/lib/jvm/java-8-openjdk-amd64/`
+
+7. no hung up
+	- `nohup java -jar app.jar &`
+	- `pidof java`
+	 
+8. convert file encoding
+	- `dd conv=ascii if=start.sh of=start.sh.txt`
+9. Redis
+	- `sudo service redis-server stop`
+	- `ps aux | grep redis`
+	- `redis-server`
+	- `redis-cli`
+
+10. find some file
+    - `find / -name app.jar`
+
+11. de-package
+    - `sudo dpkg -i file.deb`
+
+12. my local nginx config:
+    - `cd /etc/nginx/sites-enabled`
+	- `ll`
+    - `haohanwubian -> /etc/nginx/sites-available/haohanwubian`
+ 
+

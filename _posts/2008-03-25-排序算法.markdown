@@ -2,7 +2,7 @@
 layout: post
 title:  "排序算法"
 date:   2008-03-25 20:03:00 +0800
-categories: java
+categories: Java
 ---
 
 复习了一下排序算法。当年学数据结构的时候学的是头大脑袋蒙；现在依然蒙，但不像以前蒙的那么厉害了。
