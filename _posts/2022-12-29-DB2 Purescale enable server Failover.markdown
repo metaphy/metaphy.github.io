@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DB2 Purescale enable server Failover"
-date: 2022-11-30 11:20:10 +0800
+date: 2022-12-29 19:35:00 +0800
 categories: Java-spring
 --- 
 
