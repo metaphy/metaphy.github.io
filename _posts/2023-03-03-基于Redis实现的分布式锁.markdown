@@ -1,0 +1,140 @@
+---
+layout: post
+title: "基于Redis实现的分布式锁"
+date: 2023-03-03 21:05:00 +0800
+categories: java
+--- 
+
+分布式锁有非常广泛的适应场景，如果有多个系统或者一个系统有多个副本去访问同一个共享资源，并且读和写操作都存在的情况下，分布式锁就非常有必要了。
+
+分布式锁的实现可以使用多种方式，比如基于MySQL实现，基于Zookeeper实现，或者下面所要讲的基于Redis实现。
+
+基于多个Redis Master实现分布式锁有个算法叫RedLock, 详细见：https://redis.io/docs/manual/patterns/distributed-locks/
+
+此处不说RedLock, 只是说下基于单节点Redis实现的一个分布式锁，其核心是 {% highlight java%}SET key random-value NX EX 30{% endhighlight %}
+
+Java代码如下：
+{% highlight java %}
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.params.SetParams;
+
+public class RedisDistributedLock {
+    private static final String LOCK_KEY = "my_lock_key";
+    private static final int LOCK_EXPIRE_TIME_IN_SECONDS = 30;
+    private static final int MAX_RETRY_TIMES = 50;
+    private static final long RETRY_INTERVAL_IN_MILLISECONDS = 100;
+    private final Jedis jedis;
+    private final String uniqueLockValue;
+
+    public RedisDistributedLock(Jedis jedis) {
+        this.jedis = jedis;
+        this.uniqueLockValue = java.util.UUID.randomUUID().toString();
+    }
+
+    public boolean acquireLock() {
+        int retryTimes = 0;
+        SetParams setParams = new SetParams();
+        setParams.nx().ex(LOCK_EXPIRE_TIME_IN_SECONDS);
+
+        while (retryTimes < MAX_RETRY_TIMES) {
+            String result = jedis.set(LOCK_KEY, uniqueLockValue, setParams);
+            if (result != null && result.equalsIgnoreCase("OK")) {
+                return true;
+            }
+            retryTimes++;
+            try {
+                Thread.sleep(RETRY_INTERVAL_IN_MILLISECONDS);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        return false;
+    }
+
+    public void releaseLock() {
+        String redisValue = jedis.get(LOCK_KEY);
+
+        if (redisValue!=null && redisValue.equals(uniqueLockValue)) {
+            jedis.del(LOCK_KEY);
+        }
+    }
+}
+
+{% endhighlight %}
+
+这里，使用Scala来测试，主要是利用Scala的list.par 创建一个并行数据集，并利用多核CPU的各个核心进行并发获取锁的测试：
+{% highlight scala %} 
+import redis.clients.jedis.Jedis
+import scala.util.Random
+
+object RedisDistributedLockTest extends App {
+  val list_length = 16
+  val threads = List.range(0, list_length)
+
+  val results = new StringBuffer()
+
+  threads.par.foreach( i => {
+    val jedis = new Jedis("localhost", 6379)
+    val lock = new RedisDistributedLock(jedis)
+    var locked = false
+
+    try{
+      locked = lock.acquireLock()
+      if(locked) {
+        println(s"Thread $i got the lock and start business ...")
+        results.append("a")
+        Thread.sleep(Random.nextInt(100))
+      } else {
+        println(s"Thread $i hasn't got a Lock!")
+      }
+    } finally {
+      if(locked) {
+        lock.releaseLock()
+        println(s"Thread $i released the lock!")
+        results.append("b")
+      }
+
+      jedis.close()
+    }
+  })
+
+
+  assert(results.toString.length == list_length * 2, "Result error!")
+}
+{% endhighlight %}
+
+测试执行结果如下：
+{% highlight java %} 
+Thread 4 got the lock and start business ...
+Thread 4 released the lock!
+Thread 5 got the lock and start business ...
+Thread 5 released the lock!
+Thread 7 got the lock and start business ...
+Thread 7 released the lock!
+Thread 6 got the lock and start business ...
+Thread 6 released the lock!
+Thread 3 got the lock and start business ...
+Thread 3 released the lock!
+Thread 9 got the lock and start business ...
+Thread 9 released the lock!
+Thread 11 got the lock and start business ...
+Thread 11 released the lock!
+Thread 13 got the lock and start business ...
+Thread 13 released the lock!
+Thread 2 got the lock and start business ...
+Thread 2 released the lock!
+Thread 14 got the lock and start business ...
+Thread 14 released the lock!
+Thread 1 got the lock and start business ...
+Thread 1 released the lock!
+Thread 10 got the lock and start business ...
+Thread 10 released the lock!
+Thread 12 got the lock and start business ...
+Thread 12 released the lock!
+Thread 8 got the lock and start business ...
+Thread 8 released the lock!
+Thread 15 got the lock and start business ...
+Thread 15 released the lock!
+Thread 0 got the lock and start business ...
+Thread 0 released the lock!
+{% endhighlight %}
