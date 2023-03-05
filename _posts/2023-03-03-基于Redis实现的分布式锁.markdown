@@ -5,7 +5,7 @@ date: 2023-03-03 21:05:00 +0800
 categories: java
 --- 
 
-分布式锁有非常广泛的适应场景，如果有多个系统或者一个系统有多个副本去访问同一个共享资源，并且读和写操作都存在的情况下，分布式锁就非常有必要了。
+分布式锁有非常广泛的适应场景，如果有多个系统或者一个系统有多个副本去访问同一个共享资源，并且兼有读和写的访问模式(只读模式下没必要用锁)，分布式锁就非常有必要了。
 
 分布式锁的实现可以使用多种方式，比如基于MySQL实现，基于Zookeeper实现，或者下面所要讲的基于Redis实现。
 
@@ -71,7 +71,7 @@ object RedisDistributedLockTest extends App {
   val list_length = 16
   val threads = List.range(0, list_length)
 
-  val results = new StringBuffer()
+  val results = new StringBuffer() //进行最终结果的verification
 
   threads.par.foreach( i => {
     val jedis = new Jedis("localhost", 6379)

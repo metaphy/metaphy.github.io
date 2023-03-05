@@ -35,11 +35,12 @@ categories: Linux
 	 
 8. convert file encoding
 	- `dd conv=ascii if=start.sh of=start.sh.txt`
+
 9. Redis
 	- `sudo service redis-server stop`
 	- `ps aux | grep redis`
-	- `redis-server`
-	- `redis-cli`
+	- `redis-server &`
+	- `redis-cli -h hostname -p port -a passphase`
 
 10. find some file
     - `find / -name app.jar`
@@ -66,3 +67,12 @@ categories: Linux
 
 16. random int between 0 and 65535 
 	- `od -An -N2 -i /dev/urandom | tr -d ' '`
+
+17. tar
+	- `tar -cvf test.tar test/`
+	- `tar -xvf test.tar`
+
+18. md5sum 
+	- `md5sum test.tar`
+	- `sha256sum test.tar`
+	- `sha512sum test.tar`
