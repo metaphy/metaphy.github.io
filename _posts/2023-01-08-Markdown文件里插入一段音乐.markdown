@@ -47,3 +47,4 @@ categories: scripts
 把我当成一棵树吧
 ```
 突然发现markdown文件还能干这样的事情，还是挺震撼的。
+这个主要是利用网易音乐提供的一个iframe，嵌入到了markdown文件里，转成html后依旧是一个iframe.
