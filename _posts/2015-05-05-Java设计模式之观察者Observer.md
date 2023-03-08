@@ -44,11 +44,11 @@ public class WeatherObserver implements Observer {
         Weather weather = new Weather();
 
         WeatherObserver tv = new WeatherObserver("Local TV Station");
-        WeatherObserver radio = new WeatherObserver("Airport");
+        WeatherObserver airport = new WeatherObserver("Airport");
         WeatherObserver mojiApp = new WeatherObserver("Moji App");
 
         weather.addObserver(tv);
-        weather.addObserver(radio);
+        weather.addObserver(airport);
         weather.addObserver(mojiApp);
 
         weather.publishMessage("It will heavily rain tomorrow");
