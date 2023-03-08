@@ -107,12 +107,12 @@ public class ComputerDirector {
     
     public static void main(String[] args) {
         ComputerDirector director = new ComputerDirector();
+        
         IComputerBuilder macBookBuilder = new MacBookBuilder();
-        IComputerBuilder thinkPadBuilder = new ThinkPadBuilder();
-    
         Computer mac = director.build(macBookBuilder);
         System.out.println(mac);
-    
+        
+        IComputerBuilder thinkPadBuilder = new ThinkPadBuilder();
         Computer thinkpad = director.build(thinkPadBuilder);
         System.out.println(thinkpad);
     }
