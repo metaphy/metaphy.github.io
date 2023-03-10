@@ -118,7 +118,7 @@ public class ComputerDirector {
     }
 }
 {% endhighlight %}
-Output
+最终输出结果：
 {% highlight java %}
 Computer [MacBook Pro] CPU=Intel Core i7 2.3GHz, Memory=8GB
 Computer [ThinkPad X1] CPU=Intel i5 2520M, Memory=8GB

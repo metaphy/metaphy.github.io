@@ -57,7 +57,7 @@ public class WeatherObserver implements Observer {
 }
 {% endhighlight %}
  
-Output
+结果如下
 {% highlight java %}
 Observer Moji App receives message: It will heavily rain tomorrow
 Observer Airport receives message: It will heavily rain tomorrow
