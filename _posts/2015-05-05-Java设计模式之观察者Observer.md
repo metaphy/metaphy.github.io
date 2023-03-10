@@ -5,7 +5,7 @@ date:   2015-05-05 13:15:00 +0800
 categories: Java
 --- 
 
-观察者模式（Observer Pattern）是行为型模式中非常典型的一种设计模式，它定义对象间的一对多的关系，当一个对象发生改变时，所有依赖它的对象都会得到通知。它的这一解耦方式非常像发布Publish/订阅Subscribe模式，或者生产者Producer/消费者Consumer模式。
+观察者模式（Observer Pattern）是行为型模式中非常典型的一种设计模式，它定义**对象间的一对多的关系，当一个对象发生改变时，所有依赖它的对象都会得到通知**。它的这一解耦方式非常像发布Publish/订阅Subscribe模式，或者生产者Producer/消费者Consumer模式。
 
 实际开发中这一模式应用非常广泛，java.util库中已经封装好Observable和Observer，所以使用Java来实现这一模式也很简单。下面演示天气信息的发布，以及关注天气的各方：本地电视台，机场和Moji App自动接收到天气信息的例子。
 
