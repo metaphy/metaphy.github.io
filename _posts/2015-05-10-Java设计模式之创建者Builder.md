@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Java设计模式之创建者Builder"
-date:   2015-05-05 13:11:00 +0800
+date:   2015-05-10 13:11:00 +0800
 categories: Java
 --- 
 
@@ -12,6 +12,8 @@ categories: Java
 * Computer, 电脑类，实体类，即我们最终需要的各种各样不同的电脑的类。  
 * IComputerBuilder, 电脑对象的创建接口，用来创建电脑的不同部件；各个不同的电脑创建器都需要实现它。
 * ComputerDirector，使用不同的Computer创建器并构造出不同的Computer实例，并测试。
+
+![pic](/images/2015-05-10-builder.png)
 
 {% highlight java %}
 public class Computer {
@@ -119,7 +121,7 @@ public class ComputerDirector {
 }
 {% endhighlight %}
 最终输出结果：
-{% highlight java %}
+```
 Computer [MacBook Pro] CPU=Intel Core i7 2.3GHz, Memory=8GB
 Computer [ThinkPad X1] CPU=Intel i5 2520M, Memory=8GB
-{% endhighlight %} 
+```

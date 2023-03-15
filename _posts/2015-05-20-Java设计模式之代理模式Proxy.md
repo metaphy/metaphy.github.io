@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Java设计模式之代理模式Proxy"
-date:   2015-05-06 18:00:00 +0800
+date:   2015-05-20 11:00:00 +0800
 categories: Java
 --- 
 
@@ -17,6 +17,8 @@ categories: Java
 * StrengthSports: 强健体育公司，会提供公司实际的联系电话
 * Proxy114: 114查号台，把强健体育提供给它的电话号码提供给大家
 * ProxyDemo: 测试用
+
+![pic](/images/2015-05-20-proxy.png)
 
 {% highlight java %}
 public interface IContact {
