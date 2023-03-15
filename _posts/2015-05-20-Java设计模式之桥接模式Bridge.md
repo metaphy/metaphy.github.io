@@ -11,7 +11,7 @@ categories: Java
 
 其中的核心问题在于，不同的操作平台(X Window 和PM Window)以及不同样子的Window(IconWindow)并不在一个**抽象维度**，我们把两个不同维度的类型掺杂到一起，必然会导致代码臃肿难看，因为最终不得不做出m * n种组合方案。为了解决相关问题，使用Bridge模式，如下图。
 
-![pic](/images/2015-05-07.png)
+![pic](/images/2015-05-20-bridge.png)
 
 再举一个具体的例子，比如我们需要Phone这个类型，其中的两个维度分别是手机品牌(比如我们有Nokia和小米手机）以及手机类型（智能机和传统的按键手机），以及每种手机都有的功能call(); 我们在此对手机类型做单独处理，使Phone这个类包含TypedPhone，这就是Bridge模式。
 
