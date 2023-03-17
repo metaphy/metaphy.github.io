@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Java设计模式之观察者Observer"
-date:   2015-05-30 14:00:00 +0800
+date:   2015-05-30 16:10:00 +0800
 categories: Java
 --- 
 
