@@ -141,10 +141,10 @@ Drinks: Water, Milk, Coffee, Red Tea
 
 结构型模式
 ====================
+  * [Java设计模式之桥接模式Bridge](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8FBridge.html)
   * [Java设计模式之享元模式Flyweight](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8FFlyweight.html)
   * [Java设计模式之代理模式Proxy](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8FProxy.html)
   * [Java设计模式之外观模式Facade](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8FFacade.html)
-  * [Java设计模式之桥接模式Bridge](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8FBridge.html)
   * [Java设计模式之组合模式Composite](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8FComposite.html)
 
 行为型模式
