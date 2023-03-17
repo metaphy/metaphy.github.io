@@ -16,6 +16,7 @@ categories: Java
 * RemoteController, 遥控器，包含LightOnOffCommand和LightColorCommand等命令，遥控器的所有命令都对Command object下达
 * CommandDemo, 测试类
 
+![pic](/images/2015-05-30-command.png)
 
 {% highlight java %} 
 public interface Command {
