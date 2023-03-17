@@ -148,6 +148,8 @@ Drinks: Water, Milk, Coffee, Red Tea
   * [Java设计模式之组合模式Composite](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8FComposite.html)
 
 行为型模式
-====================
-  * [Java设计模式之观察者Observer](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85Observer.html)
+====================  
   * [Java设计模式之责任链模式ChainOfResponsibility](https://metaphy.github.io/java/2015/05/20/Java设计模式之责任链模式ChainOfResponsibility.html)
+  * [Java设计模式之中介者Mediator](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%B8%AD%E4%BB%8B%E8%80%85Mediator.html)
+  * [Java设计模式之观察者Observer](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85Observer.html)
+  
