@@ -141,15 +141,22 @@ Drinks: Water, Milk, Coffee, Red Tea
 
 结构型模式
 ====================
-  * [Java设计模式之桥接模式Bridge](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8FBridge.html)
-  * [Java设计模式之享元模式Flyweight](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8FFlyweight.html)
-  * [Java设计模式之代理模式Proxy](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8FProxy.html)
   * [Java设计模式之外观模式Facade](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8FFacade.html)
   * [Java设计模式之组合模式Composite](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8FComposite.html)
+  * [Java设计模式之享元模式Flyweight](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8FFlyweight.html)
+  * [Java设计模式之代理模式Proxy](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8FProxy.html)
+  * [Java设计模式之桥接模式Bridge](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8FBridge.html)
+
 
 行为型模式
 ====================  
-  * [Java设计模式之责任链模式ChainOfResponsibility](https://metaphy.github.io/java/2015/05/20/Java设计模式之责任链模式ChainOfResponsibility.html)
+  * [Java设计模式之策略模式Strategy](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8FStrategy.html)
+  * [Java设计模式之状态模式State](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8FState.html)
+  * [Java设计模式之访问者Visitor](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%AE%BF%E9%97%AE%E8%80%85Visitor.html)
+  * [Java设计模式之观察者Observer](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85Observer.html) 
   * [Java设计模式之中介者Mediator](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E4%B8%AD%E4%BB%8B%E8%80%85Mediator.html)
-  * [Java设计模式之观察者Observer](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A7%82%E5%AF%9F%E8%80%85Observer.html)
+  * [Java设计模式之命令模式Command](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8FCommand.html)  
+  * [Java设计模式之责任链模式ChainOfResponsibility](https://metaphy.github.io/java/2015/05/30/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8FChainOfResponsibility.html)  
+  
+
   
