@@ -135,10 +135,9 @@ Drinks: Water, Milk, Coffee, Red Tea
 
 创建型模式
 ====================
+  * [Java设计模式之抽象工厂模式AbstractFactory](https://metaphy.github.io/java/2015/05/09/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8FAbstractFactory.html)
   * [Java设计模式之创建者Builder](https://metaphy.github.io/java/2015/05/10/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%88%9B%E5%BB%BA%E8%80%85Builder.html)
   
-
-
 结构型模式
 ====================
   * [Java设计模式之外观模式Facade](https://metaphy.github.io/java/2015/05/20/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8FFacade.html)
