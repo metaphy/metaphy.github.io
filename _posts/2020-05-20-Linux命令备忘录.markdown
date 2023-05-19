@@ -76,3 +76,7 @@ categories: Linux
 	- `md5sum test.tar`
 	- `sha256sum test.tar`
 	- `sha512sum test.tar`
+
+19. npm
+  - `npm config get registry`
+  - `npm config set registry https://registry.npmmirror.com`
