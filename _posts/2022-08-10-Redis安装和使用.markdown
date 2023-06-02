@@ -30,4 +30,189 @@ PONG
 OK
 127.0.0.1:6379> GET status
 "200 - Success"
-{% endhighlight %}
+{% endhighlight %} 
+
+Redis常用操作及命令总结如下：
+{% highlight scala %}
+--CAUTIONS--
+flushall
+flushdb
+
+> set name peter
+OK
+> get name
+"peter"
+
+--String limit is 500M
+
+> set counter 100
+OK
+> incr counter
+(integer) 101
+> incr counter
+(integer) 102
+> incrby counter 50
+(integer) 152
+
+
+> type mykey
+string
+> exists mykey
+(integer) 1
+> del mykey
+(integer) 1 
+> keys *
+
+> set thekey 100 ex 100
+OK
+
+> set thekey 34 nx
+OK  / nil
+
+> expire thekey 20
+
+> ttl thekey
+(integer) 9
+
+-- Max List length is 2^32
+
+> LPUSH work:queue:ids 101
+(integer) 1
+> LPUSH work:queue:ids 237
+(integer) 2
+> RPOP work:queue:ids
+"101"
+> RPOP work:queue:ids
+"237"
+> LLEN work:queue:ids
+(integer) 0
+
+lpush / lpop ---- stack
+lpush / rpop ---- queue
+
+-- Set
+> SADD user:01:books 347
+(integer) 1
+> SADD user:01:books 561
+(integer) 1
+> SADD user:01:books 742
+(integer) 1
+> SADD user:02:books 561
+(integer) 1
+
+> sismember user:01:books 347
+(integer) 1
+
+> scard user:01:books
+(integer) 3
+
+> sinter user:01:books user:02:books
+
+-- Hash
+
+> HSET user:01 userid martina firstname Martina lastname Elisa country GB
+(integer) 4
+> HGET user:01 firstname
+"Martina"
+
+> hkeys user:01
+1) "userid"
+2) "firstname"
+3) "lastname"
+4) "country"
+
+> hgetall user:01
+1) "userid"
+2) "martina"
+3) "firstname"
+4) "Martina"
+5) "lastname"
+6) "Elisa"
+7) "country"
+8) "GB"
+
+--Zset
+
+>zadd leaderboard 10 user:a 11 user:b 12 user:c 8 user:d 3 user:e
+(integer) 5
+ 
+> zrange leaderboard 0 3 REV withscores
+1) "user:c"
+2) "12"
+3) "user:b"
+4) "11"
+5) "user:a"
+6) "10"
+
+
+--Stream is a data structure that acts like an append-only log
+
+> xadd temperatures * temp 10.5 humidity 38
+"1677131968867-0"
+> xadd temperatures * temp -5 humidity 10
+"1677131974805-0"
+> xadd temperatures * temp 7 humidity 36
+"1677131980129-0"
+
+
+> XRANGE temperatures 1677131968867-0 + COUNT 3
+1) 1) "1677131968867-0"
+   2) 1) "temp"
+      2) "10.5"
+      3) "humidity"
+      4) "38"
+2) 1) "1677131974805-0"
+   2) 1) "temp"
+      2) "-5"
+      3) "humidity"
+      4) "10"
+ 
+--Bitmap
+1 bit of value 0 or 1
+
+
+127.0.0.1:6379> setbit ch 1 1
+(integer) 0
+127.0.0.1:6379> setbit ch 2 1
+(integer) 0
+127.0.0.1:6379> setbit ch 7 1
+(integer) 0
+127.0.0.1:6379> get ch
+"a"
+
+ACCII 97 .... 0110 0001
+
+
+127.0.0.1:6379> setbit login:2023-02-20 102 1
+(integer) 0
+127.0.0.1:6379> setbit login:2023-02-20 101 1
+(integer) 0
+127.0.0.1:6379> setbit login:2023-02-20 104 1
+(integer) 0
+127.0.0.1:6379> bitcount login:2023-02-20
+(integer) 4
+
+127.0.0.1:6379> set inventory 1000
+OK
+127.0.0.1:6379> set sold 0
+OK
+127.0.0.1:6379> multi
+OK
+127.0.0.1:6379(TX)> decrby inventory 120
+QUEUED
+127.0.0.1:6379(TX)> incrby sold 120
+QUEUED
+127.0.0.1:6379(TX)> exec
+1) (integer) 120
+2) (integer) 880
+
+
+multi
+decrby inventory 10
+incrby sold 10
+exec
+
+-----------Result:: 
+1) (error) ERR value is not an integer or out of range
+2) (integer) 20
+{% endhighlight %} 
