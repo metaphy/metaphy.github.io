@@ -176,5 +176,5 @@ def maxSumChatGPT(arr: Array[Int]): Int = {
 
   println(s"ChatGPT max sum: $maxSum")
   maxSum
-  }
+}
 {% endhighlight %}
