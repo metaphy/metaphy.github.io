@@ -18,7 +18,7 @@ Java内置3种标准注解:
 - @Documented
 - @Inherited 
 
-下面举个简单例子解释一下注解的编写以及解析用法，主要有4个类，其中我们先编写UseCase类，这个是一个注解
+下面举个简单例子解释一下注解的编写以及解析用法，主要有3个类，其中我们先编写UseCase类，这个是一个注解
 
 {% highlight java %}@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -54,7 +54,8 @@ public class UseCaseTracker {
         for (Method method: clazz.getDeclaredMethods()){
             UseCase uc = method.getAnnotation(UseCase.class);
             if (uc != null) {
-                System.out.println("Found UseCase id: " + uc.id() + " and description: " +uc.description());
+                System.out.println("Found UseCase id: " + uc.id() 
+                    + " and description: " +uc.description());
             }
         }
     }
