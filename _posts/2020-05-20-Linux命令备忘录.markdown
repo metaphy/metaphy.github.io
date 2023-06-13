@@ -80,3 +80,7 @@ categories: Linux
 19. npm
   - `npm config get registry`
   - `npm config set registry https://registry.npmmirror.com`
+
+20. Uninstall a package
+	- dpkg --list
+	- sudo apt-get remove <package name> && sudo apt-get autoremove
