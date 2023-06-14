@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "MySQL8在CentOS7的安装与配置."
-date: 2022-12-03 00:11:00 +0800
+date: 2022-12-03 21:11:00 +0800
 categories: Java-spring
 --- 
 MySQL在CentOS 7上的安装请参考：https://zhuanlan.zhihu.com/p/623778183
