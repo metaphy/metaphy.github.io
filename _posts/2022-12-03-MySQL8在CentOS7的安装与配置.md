@@ -29,9 +29,7 @@ MySQL在CentOS 7上的安装请参考：https://zhuanlan.zhihu.com/p/623778183
 ```firewall-cmd --zone=public --add-port=3306/tcp --permanent```
 ```firewall-cmd --reload```
 
-5. 这样我们就可以使用peter用户进行远程连接了。另外，mysql的配置文件通常是/etc/my.cnf,有些版本可能需要手工配置才允许远程访问
-```cat /etc/my.cnf```
-比如增加下面这行，或者删除skip-network这行等等
+5. 这样我们就可以使用peter用户进行远程连接了。另外，mysql的配置文件通常是/etc/my.cnf,有些版本可能需要手工配置才允许远程访问；比如增加下面这行，或者删除skip-network这行等等
 ```bind-address=0.0.0.0``` 
 
 
