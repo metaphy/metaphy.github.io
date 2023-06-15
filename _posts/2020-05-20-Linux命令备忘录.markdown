@@ -13,9 +13,9 @@ categories: Linux
 2. Ubuntu System info:
 	- `lsb_release -a` 
 	- `cat /proc/version`
+	- `cat /etc/redhat-release`
 	- `cat /proc/meminfo`
 	- `cat /proc/cpuinfo | grep cores | uniq`
-
 3. Disk:
 	- `df -h`
 	- `du -h --max-depth=1` 
