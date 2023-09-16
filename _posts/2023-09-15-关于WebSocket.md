@@ -208,43 +208,43 @@ deals.json
         "dealsData": [
             {
                 "minute": 0,
-                "price": 556
+                "price": 556.1
             },
             {
                 "minute": 1,
-                "price": 532.82
+                "price": 932.82
             },
             {
                 "minute": 2,
-                "price": 480.29
+                "price": 1480.28
             },
             {
                 "minute": 3,
-                "price": 462.99
+                "price": 2662.00
             },
             {
                 "minute": 4,
-                "price": 417.63
+                "price": 3417.63
             },
             {
                 "minute": 5,
-                "price": 398.56
+                "price": 5008.00
             },
             {
                 "minute": 6,
-                "price": 379.27
+                "price": 7938.27
             },
             {
                 "minute": 7,
-                "price": 351.75
+                "price": 8351.75
             },
             {
                 "minute": 8,
-                "price": 378.3
+                "price": 11378.3
             },
             {
                 "minute": 9,
-                "price": 398.4
+                "price": 15298.04
             }
         ]
     }
