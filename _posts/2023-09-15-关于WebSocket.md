@@ -67,7 +67,7 @@ wss.on('connection', (ws) => {
 })
 ```
 
-最终，我们使用setInterval以一定频率，比如每5秒一次向client 发送消息，并且在connection关闭时，清理这个interval
+最终，我们使用setInterval以一定频率，比如每5秒一次向client 发送消息，并且在connection关闭时，清理这个interval:
 ```
 ws.dealUpdateInterval = setInterval(() => {
   if (connectionInfo.productsToMonitor.length > 0) {
@@ -98,7 +98,7 @@ ws.connectionTimeout = setTimeout(() => {
 }, 300000)
 ```
 
-That is it! 这个就是server部分的核心代码了。client端使用一个HTML5页面，code非常简单，比当年写Ajax还要简单，所以不再解释。值的注意的是，在测试前，我们需要先检查浏览器是否支持WebSocket对象，好在当前我使用的Chrome, Firefox, Edge 均支持：
+That's it! 这个就是server部分的核心代码了。client端使用一个HTML5页面，code非常简单，比当年手写Ajax要简单，所以不再解释。值的注意的是，在测试前，我们需要先检查浏览器是否支持WebSocket对象，好在目前新版本的Chrome, Firefox, Edge 均支持：
 ```
 if(!window.WebSocket) {   
   console.log('WebSocket is NOT supported!')   
@@ -118,7 +118,9 @@ node index
 ```
 然后在浏览器中打开test-client.html, 并打开console. 
 
-第1秒: 客户端发送subscribe event ["WLQ","QDLHT"]，服务器接收到消息，会以5秒的频率发送这2件商品的交易额信息
+第0秒：客户端连接服务器，连接成功后收到服务器返回的'connected'信息；之后，服务器会以5秒的频率发送商品的交易额信息
+
+第1秒: 客户端发送subscribe event ["WLQ","QDLHT"]，服务器将发送指定的商品的交易信息
 
 第5秒：服务器发回["WLQ","QDLHT"] 的交易信息
 
@@ -134,7 +136,7 @@ node index
 
 第30秒：服务器主动断开连接，客户端显示close信息：Server disconnected! Bye~~
 
-整个log也显示出相应的信息：
+整个log显示出的相应信息，与我们的测试设计完全符合：
 ```
 2023-09-16T04:01:00.373Z: WebSocket object is created
 2023-09-16T04:01:00.385Z: ****Connection Successfully****
@@ -149,7 +151,8 @@ node index
 2023-09-16T04:01:30.400Z: Server disconnected! Bye~~
 ```
 
-最后代码附下，需要注意的是为了保持代码简洁，需要必要的输入信息检测和错误处理都省略了，实际开发中不要省。
+最后代码附下，需要注意的是为了保持代码简洁，必要的输入信息检测和错误处理都省略了，实际开发中不能省。
+
 deals.json
 ```
 [
