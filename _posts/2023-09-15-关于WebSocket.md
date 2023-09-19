@@ -72,8 +72,8 @@ wss.on('connection', (ws) => {
 ws.dealUpdateInterval = setInterval(() => {
   if (connectionInfo.productsToMonitor.length > 0) {
     ws.send(getDealsUpdateEvent(connectionInfo))
-  connectionInfo.productsUpdateCount += 1
-}
+    connectionInfo.productsUpdateCount += 1
+  }
 }, 5000)
 
 ws.on('close', () => {
@@ -81,7 +81,7 @@ ws.on('close', () => {
 })
 ```
 
-为了确保在网络出问题时，server端不会长时间持有这个连接，server端使用定期ping 客户端的方式，在多次ping而无响应时，server将会关闭这个connection.
+为了确保在网络出问题时，server端不会长时间持有这个连接，server端使用定期ping 客户端的方式，在多次ping而无响应时，server将会关闭这个connection，下面的演示只是一次ping不通就断开的情况：
 ```
 ws.pingInterval = setInterval(() =>{
   if(connectionInfo.isActive) {
