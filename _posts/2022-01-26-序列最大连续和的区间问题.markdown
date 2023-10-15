@@ -148,7 +148,7 @@ K2 - max sum value: 11165; max region: [132804, 137146]
 Done! performanceK: 11 ms; performanceK2: 22611 ms
 {% endhighlight %}
 
----------------------------------------------
+
 
 2023-02-20 后记：
 ChatGPT出来了，我问它这个问题的scala解决方式，它给出了一个代码，测试时，发现它除了对所有输入都是负数的情况处理有点问题，其他都非常完美，只要稍微改一下maxSum的初始值就通过了所有测试； 并且跟我那个罗里罗嗦的findMaxRegion 相比精简了太多！ 
