@@ -1,0 +1,68 @@
+---
+layout: post
+title:  "异或的性质"
+date:   2023-12-05 09:00:00 +0800
+categories: Javascript
+--- 
+
+异或(xor)是一种二进制运算，简单的记，就是对应数位**相异为1**.
+
+|  | 0 | 1 |
+| ---- | ---- | ---- | 
+| 0 | 0 | 1 |
+| 1 | 1 | 0 |
+
+异或满足如下性质：
+
+1. 交换律: A ^ B = B ^ A
+2. 结合率: (A ^ B) ^ C = A ^ (B ^ C)
+3. 一个二进制数与0异或还是自身: A ^ 0 = A 
+4. 一个二进制数与自身异或是0: A ^ A = 0
+
+推论性质：
+
+5. 一个数与另一个数异或2次还是自身，即 A ^ B ^ B = A
+
+A ^ B ^ B = A ^ (B ^ B) = A ^ 0 = A
+
+异或的这些性质有很多有趣的应用：
+
+1. 不用临时变量交换2个数字
+{% highlight javascript %} 
+let a = 10, b = 20
+
+a = a ^ b
+b = a ^ b = (a ^ b) ^ b = a 
+a = a ^ b = (a ^ b) ^ a = b 
+
+console.log(a, b) // 20, 10
+{% endhighlight %}
+
+2. 检验出现偶数次的数字或出现奇数次的数字。例如下面的数字都是成对出现的，里面只有一个数字出现了1次，如何找到这个数字？
+
+{% highlight javascript %} 
+let numbers = [2, 5, 7, 9, 11, 11, 9, 2, 7]
+numbers.reduce((a, b) => a ^ b) // 5
+{% endhighlight %}
+
+原理就是上面说的性质，所有数字的异或，通过交换律和结合率，会变成如下的形式：
+(a ^ a) ^ (b ^ b) ^ ... ^ x = 0 ^ 0 ^ ... ^ x = x
+
+3. 数据校验，可以通过将数据逐位异或，来生成一个校验和，来检测数据传输或存储中的错误
+{% highlight javascript %} 
+function validationCode(txt) {
+	return Array.from(txt)
+	  .map(c => c.charCodeAt(0))
+	  .reduce((a,b) => a ^ b); 
+}
+
+let hello = "hello,world";
+let hello2 = "hello，world";
+
+console.log(hello, validationCode(hello));
+console.log(hello2, validationCode(hello2));
+
+// hello,world 44
+// hello，world 65292 
+{% endhighlight %}
+ 
