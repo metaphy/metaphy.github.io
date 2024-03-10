@@ -1,0 +1,170 @@
+---
+layout: post
+title: "Java程序员十戒-翻译"
+date: 2009-08-21 13:49:00 +0800
+categories: translations
+---
+
+> 原文出处：http://www.developer.com/java/data/article.php/3612756
+
+Java程序员有许多应遵循的守则或最佳实践方式。本文概述了每个开发者最应该遵循的10条守则或戒律，如果不遵循它们，将会导致灾难性后果。
+
+1. **为代码添加注释（Add comments to your code）** – 每个人都知道这一点，但不是每个人都会这么做。你有多少次“忘记”添加注释了？确实，注释不会为你的程序增加任何函数功能。但是，有多少次，看到2周前写的代码，你都记不起它是干什么的？你很幸运，那些未注释的代码是你自己写的，你脑海中还会有残存的印象。非常不幸，大多时候，代码是别人写的，并且那个人很可能已经离开公司了。有句谚语说的好：“有来有往，互惠互利”，因此程序员应该体谅彼此（还有你自己），给你的代码加上注释。
+
+2. **不要把简单事情复杂化（Do not complicate things）** – 我曾经这么做过，我相信你也一样。开发者都倾向于采用复杂方式解决简单问题。我们在一个只有5个用户的系统中引入EJB，为一个并不需要框架的应用实现一套框架，采用属性文件、采用面向对象解决方案、使用线程，而这些根本用不着。为什么会这么做？一些人可能不知道有更好的解决方案，但另一些人可能故意这样做来学习新知识，或仅仅是因为有趣。对那些不知道更好解决方案的人，要多听有经验程序员的建议。对于那些纯粹出于个人目的而将设计复杂化的人，我建议你要更加专业一点。
+
+ 
+3. **记住 － “越少越好”并非总是如此(Keep in Mind – "Less is more" is not always better)** – 高效率的代码是件好事，但很多情况下，并非代码行数越少效率就越高。看下面这个“简单”的例子：
+
+    ```
+    if(newStatusCode.equals("SD") && (sellOffDate == null || 
+        todayDate.compareTo(sellOffDate)<0 || (lastUsedDate != null && 
+        todayDate.compareTo(lastUsedDate)>0)) || 
+        (newStatusCode.equals("OBS") && (OBSDate == null || 
+        todayDate.compareTo(OBSDate)<0))){
+            newStatusCode = "NYP";
+    }
+    ```
+
+    指出这个if条件是什么有多困难？再设想一下，写这段代码的人并没遵循第1条 － 为代码添加注释。
+    把if条件分解成2个if语句不是更容易理解吗？现在让我们看一下修改过的代码：
+
+    ```
+    if(newStatusCode.equals("SD") && (sellOffDate == null || 
+        todayDate.compareTo(sellOffDate)<0 || (lastUsedDate != null && 
+        todayDate.compareTo(lastUsedDate)>0))){
+            newStatusCode = "NYP";
+    }else if(newStatusCode.equals("OBS") && (OBSDate == null || 
+        todayDate.compareTo(OBSDate)<0)){
+            newStatusCode = "NYP";
+    }
+    ```
+
+    这样可读性不是更好吗？的确，我们写了重复语句；的确，我们多写了一个if和2个大括号；但是代码确实更加易读、更加容易理解了！
+
+4. **不要“硬编码"（No hard coding please）** – 由于时间紧迫，开发者总是会忘记或故意忽略这一条。然而另一种可能是，遵循这条戒律，我们就不会陷入“时间紧迫”的困境。定义一个static final 变量，增加一行代码，又能花多长时间呢？譬如：
+
+    ```
+    public class A {
+        public static final String S_CONSTANT_ABC = "ABC";
+        public boolean methodA(String sParam1){
+            if (A.S_CONSTANT_ABC.equalsIgnoreCase(sParam1)){
+                return true;
+            }		
+            return false;
+        }
+    }
+    ```
+
+    
+    现在，每次需要比较字符串“ABC”与某个变量的时候，我们只要引用 A.S_CONSTANT_ABC 即可，而不必记住它本身是什么。对这个常量的修改也非常方便，改一个地方即可，而不必在全部代码中查找。
+
+5. **不要发明你自己的框架（Do not invent your own frameworks）** – 不夸张地讲，已经有几千个框架存在了，大多数还是开源的。很多框架都是极完美的解决方案，并已被用到成千的系统中。我们只要关注最新的流行的框架，至少表面上要熟悉一下。一个最成功的、也是被广泛使用的例子是Struts框架，这个开源的web框架是建立web系统的极佳选择，不要试图构造你自己的Struts版本，会累死的。但你必须记住第2条（译注：原文是“第3条”，显然不对）戒律 —— 不要把简单事情复杂化。如果你要开发的系统只有3个界面，就不要用Struts. 对于这样一个系统，没有足够的需要被“控制”的东西（译注：Struts将界面做MVC划分，C即controller，所以作者说there isn't much "controlling" required）。
+
+ 
+6. **对Print行或字符串说不（Say no to Print lines and String Concatenations）** – 我知道为了调试方便，程序员喜欢到处用System.out.println ,然后对自己说过一会就删掉。但我们常常忘记删掉这些行或不愿删掉，我们用System.out.println 做测试，为什么测完后还要去改代码？这很可能导致误删一行我们需要的代码。不要低估System.out.println 的危害，看下面代码：
+    ```
+    public class BadCode {
+        public static void calculationWithPrint(){
+            double someValue = 0D;
+            for (int i = 0; i < 10000; i++) {
+                System.out.println(someValue = someValue + i);
+            }	
+        }
+        public static void calculationWithOutPrint(){
+
+                double someValue = 0D;
+                for (int i = 0; i < 10000; i++) {
+                    someValue = someValue + i;
+                }
+            
+        }
+        public static void main(String [] n) {
+            BadCode.calculationWithPrint();
+            BadCode.calculationWithOutPrint();
+        }
+    }
+    ```
+
+    下面表格可以看出，calculationWithOutPrint() 方法执行时间是0.001204 s. 作为对比，calculationWithPrint() 方法居然需要令人难以置信的10.52 s来执行！
+
+
+    (若你想知道怎么做一个这样的表，请阅读我的另一篇文章"Java Profiling with WSAD" Java Profiling with WSAD )
+
+    为了避免CPU浪费，最好的办法是引入一个包装的方法，如下：
+
+    ```
+    public class BadCode {
+
+        public static final int DEBUG_MODE = 1;
+        public static final int PRODUCTION_MODE = 2;
+
+    public static void calculationWithPrint(int logMode){	
+        double someValue = 0D;
+        for (int i = 0; i < 10000; i++) {
+            someValue = someValue + i;
+            myPrintMethod(logMode, someValue);
+        }
+    }
+            
+    public static void myPrintMethod(int logMode, double value) {
+        if (logMode > BadCode.DEBUG_MODE) {	return; }
+        System.out.println(value);	
+    }
+    public static void main(String [] n) {
+        BadCode.calculationWithPrint(BadCode.PRODUCTION_MODE);
+        }
+    }
+    ```
+
+    字符串(String)连接是另一种CPU浪费方式，看下面的例子：
+    ```
+    public static void concatenateStrings(String startingString) {
+            for (int i = 0; i < 20; i++) {
+                startingString = startingString + startingString;
+            }
+        }
+        
+        public static void concatenateStringsUsingStringBuffer(
+    String startingString) {
+            StringBuffer sb = new StringBuffer();
+            sb.append(startingString);
+                for (int i = 0; i < 20; i++) {
+                    sb.append(sb.toString());
+                }
+    }
+    ```
+    从下面表格可以看出使用 StringBuffer只要花 0.01 s 而使用String 连接需要0.08 s，选择哪种应该很明显了。
+
+7. **注意图形用户界面（Pay attention to the GUI）** – 无论听上去多荒谬，但有一点我注意过多次了：图形用户界面（GUI）对于商业用户而言与程序功能及执行效率一样重要。GUI对于应用程序的成功至关重要。 IT管理者（译注：这里应该是指程序开发方的IT management）常常忽略GUI的重要性，很多公司为了省钱而不雇佣web设计人员，而这些设计人员有足够的经验来设计“用户友好”的应用软件。Java程序员不得不依赖他们有限的HMTL知识。我见过非常多对“计算机友好”而非对“用户友好”的应用程序，同时精通软件开发和用户界面开发的开发者非常少见。 如果你是一位不幸被指派做界面开发的Java程序员，你要遵循下面3条规则：
+
+    1) 不要重新发明轮子。去看那些类似应用系统的界面。 
+
+    2) 首先建立一个原型。这一步非常关键。客户喜欢提前看到他们要用的东西。同样你可以得到他们的反馈，而不是你辛辛苦苦做出来一个客户不喜欢的东西。
+    
+    3) 试戴用户的帽子。换句话说，站在用户的角度查看需求。譬如，一个统计的界面可以分页，也可以不分页。作为开发者，很可能会忽略分页，因为这会减少很多麻烦；而站在客户角度，这就不是一个好的方案，因为数据可能多达几百行。
+
+8. **提前准备需求文档（Always Prepare Document Requirements）** – 每项业务需求都记入文档。这在童话故事中可能实现，而现实中很难做到。无论时间多么紧迫，无论截止日期如何迫近，你必须确保业务需求被记录下来。（译注：这条明显悖于敏捷开发的观念，大家要独立思考，甄别是非）
+
+9. **单元测试，单元测试，单元测试 （Unit-test. Unit-test. Unit-test）** – 我不准备讨论如何单元测试的细节，我只是想说这必须要做。这是编程中最基本的规则了，尤其不能忽略。如果你同事能为你的代码创建一个测试计划，那就再好不过了；如果不能，那就要自己做。做单元测试计划时，遵循下面原则：
+
+    编码前就写单元测试
+    保留单元测试的注释
+    对任何“有趣的”公共方法都要做单元测试（“有趣的”是指除了像最常见的getter/setter这类方法外的方法，但包含有自己内容的getter/setter 方法）
+
+10. **记住：质量，而非数量（Remember – quality, not quantity）** - 不要待的太晚（除非有必要）。我知道有时因为产品问题，截止期限或其他突发事件，不能按时下班。但经理不会因为你为一般问题待的太晚而感激或奖励你；他们会为有质量的工作而感激你。如果你遵循上面的列的原则，你就会写更健壮的、少bug的程序。这才是你最应该做的。
+
+
+结论
+本文中我总结了Java程序员最应注意的10项守则。仅仅知道是不够的，还要遵循它们。希望这些守则能让我们做更加专业的程序员。
+
+
+
+
+
+
+
+
+
+
+
