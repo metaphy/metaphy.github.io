@@ -26,7 +26,7 @@ categories: spark
 								redshift_tmp_dir = some_tmp_dir)``` 
 
 4. 因为程序并没有报错，所以只能模糊描述问题，在网上搜索答案。首先找到了stackoverflow上有人遇到个一模一样的问题，他的目标数据库是MySQL，只是光有问题没有答案。还有其他人有类似问题，但都没提供解决方案。
-	```https://stackoverflow.com/questions/61611845/preactionstruncate-table-is-not-working-in-gluecontext-write-dynamic-frame-fr	
+	```https://stackoverflow.com/questions/61611845/preactionstruncate-table-is-not-working-in-gluecontext-write-dynamic-frame-fr
 	https://repost.aws/questions/QUR4mvZ1NUQvKof115XSOxPg/aws-glue-s3-to-redshift-etl-job-ignored-preactions-and-postactions
 	```
 5. 查官方文档, 尝试把上面的from_jdbc_conf 改成 from_catalog，没有用，至此决定使用其他方案
@@ -46,5 +46,5 @@ categories: spark
       .mode("overwrite") \
       .save()
 	```
-9. 因为SQL Server的JDBC URL 跟其他的还不一样，所以这个地方也卡了一下，到最终问题解决，整整过去4个小时。 
+9. 因为SQL Server的JDBC URL 跟其他的还不一样，所以这个地方也卡了一下，到最终问题解决，已经过去4个多小时。这里首先要吐槽一下AWS Glue的代码，莫名其妙且烂，就看上面的函数方法，write_dynamic_frame.from_jdbc_conf，write不是对应的to吗？write...from是几个意思？最终的教训就是一定要做数据验证，数据条数，以及选择几条验证所有字段是不是有问题等等。 
 
