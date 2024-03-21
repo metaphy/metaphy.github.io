@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Java程序员十戒-翻译"
+title: "[翻译]Java程序员十戒"
 date: 2009-08-21 13:49:00 +0800
 categories: translations
 ---

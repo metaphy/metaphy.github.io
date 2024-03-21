@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "软件设计和开发的简史-翻译"
+title: "[翻译]软件设计和开发的简史"
 date: 2009-08-19 09:35:00 +0800
 categories: translations
 ---
