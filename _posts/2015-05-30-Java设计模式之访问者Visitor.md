@@ -2,7 +2,7 @@
 layout: post
 title:  "Java设计模式之访问者Visitor"
 date:   2015-05-30 16:20:00 +0800
-categories: Java
+categories: java
 --- 
 
 访问者（Visitor）是一种行为型模式，它表示**一个作用于某对象结构中各元素的操作**。它主要目的是在不修改现有对象结构的前提下，对对象添加新的操作。

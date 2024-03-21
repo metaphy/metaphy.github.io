@@ -2,7 +2,7 @@
 layout: post
 title:  "八皇后问题"
 date:   2008-02-04 15:07:00 +0800
-categories: Java
+categories: java
 ---
 
 根据C程序改的Java的实现。以下为已知的N-皇后解数目。

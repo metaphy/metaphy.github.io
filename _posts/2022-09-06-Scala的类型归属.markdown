@@ -2,7 +2,7 @@
 layout: post
 title: "Scala的类型归属(Type ascription)"
 date: 2022-09-06 22:28:10 +0800
-categories: scala-spark
+categories: scala
 --- 
 
 Scala的代码有时确实可以写的很简洁，但如果对其中某些表达方式不熟悉的话，则不容易看懂。

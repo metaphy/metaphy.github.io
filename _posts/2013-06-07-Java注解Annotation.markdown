@@ -2,7 +2,7 @@
 layout: post
 title: "Java注解Annotation"
 date:  2013-06-07 12:55:00 +0800
-categories: Java
+categories: java
 ---
 
 Java注解是Java 5的一个重要的新特性，它是一种元数据形式，可以为程序添加语义化信息(比如Spring @Component用来标记一个需要注册到容器的类)；这些信息可以被编译器、解析器或框架等通过反射方式来解析和使用。 

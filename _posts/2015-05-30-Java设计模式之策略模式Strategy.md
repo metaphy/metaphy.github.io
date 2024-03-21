@@ -2,7 +2,7 @@
 layout: post
 title:  "Java设计模式之策略模式Strategy"
 date:   2015-05-30 17:10:00 +0800
-categories: Java
+categories: java
 --- 
 
 策略模式Strategy**定义一系列算法，把它们封装起来，并且使它们可以相互替换**。策略模式应用比较广泛，比如Java AWT的Layout manager，或者Gateway程序中的负载均衡策略等。总之，如果我们需要提供多种策略去实现某一种行为，可以使用策略模式。

@@ -2,7 +2,7 @@
 layout: post
 title: "DB2 Purescale enable server Failover"
 date: 2022-12-01 19:35:00 +0800
-categories: Java-spring
+categories: database
 --- 
 
 我们的DB2 PS在云上本身就是cluster 部署，有2个members，故且叫做test1.ab.member 和 test2.ab.member, 两者的端口分别是50000和60000，数据库名都是SAMPLEDB。DB2 PS 本身是支持一个叫做ACR（Automatic Client Reroute）的特性的，即在一个member出现故障时候，Client自动连到另一个member上。下面介绍的是JDBC的连接方式。

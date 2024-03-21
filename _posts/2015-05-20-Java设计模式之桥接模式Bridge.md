@@ -2,7 +2,7 @@
 layout: post
 title:  "Java设计模式之桥接模式Bridge"
 date:   2015-05-20 08:12:10 +0800
-categories: Java
+categories: java
 --- 
 
 桥接模式(Bridge)是一种结构型模式，它的定义很简单，即**将抽象部分与它的实现部分分离，使它们都可以独立的变化**。虽然定义简单，但是理解起来却不简单。

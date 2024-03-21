@@ -2,7 +2,7 @@
 layout: post
 title:  "关于Java的“浅拷贝”和“深拷贝”"
 date:   2012-07-24 14:31:00 +0800
-categories: Java
+categories: java
 ---
 
 这是关于Java的clone， 一些知道的和不知道的。

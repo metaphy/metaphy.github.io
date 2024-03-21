@@ -2,7 +2,7 @@
 layout: post
 title: "Spark分Partitions及Dataframe的例子"
 date: 2021-11-03 21:59:00 +0800
-categories: scala-spark
+categories: spark
 --- 
 
 这个例子很简单，但我也想了半天。有如下的RDD，每行表示某个ID的进账（Inc='I')或出账（Inc='E')金额，统计各个ID的合计金额分别是多少。

@@ -2,7 +2,7 @@
 layout: post
 title: "Spring Cron表达式"
 date: 2022-11-30 11:20:10 +0800
-categories: Java-spring
+categories: java-spring
 --- 
 
 Spring的Cron表达式如下：

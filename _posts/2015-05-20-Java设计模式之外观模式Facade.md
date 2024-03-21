@@ -2,7 +2,7 @@
 layout: post
 title:  "Java设计模式之外观模式Facade"
 date:   2015-05-20 14:00:01 +0800
-categories: Java
+categories: java
 --- 
 
 外观模式(Facade Pattern)**隐藏系统的复杂性，并向客户端提供了一个通用的访问接口**。 这种类型的设计模式属于结构型模式，它向现有的系统添加一个接口，来隐藏系统的复杂性，如下图。

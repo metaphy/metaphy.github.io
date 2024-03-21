@@ -2,7 +2,7 @@
 layout: post
 title:  "生命游戏"
 date:   2006-02-04 17:05:14 +0800
-categories: scripts
+categories: programmer
 ---
 出差累死，还用VB做，还这点米，无聊，写个小东西：
 

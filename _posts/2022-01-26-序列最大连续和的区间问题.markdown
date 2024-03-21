@@ -2,7 +2,7 @@
 layout: post
 title: "序列最大连续和的区间问题"
 date: 2022-01-26 10:15:00 +0800
-categories: scala-spark
+categories: scala
 --- 
 
 问题如下： 给定一个实数序列，设计一个最有效算法，找到一个总和最大的区间。 这个问题也被称为总和最大区间问题。

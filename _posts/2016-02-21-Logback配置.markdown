@@ -2,7 +2,7 @@
 layout: post
 title:  "Logback配置"
 date: 2016-02-21 10:20:02 +0800
-categories: Java
+categories: java
 ---
 
 ```

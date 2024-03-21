@@ -2,7 +2,7 @@
 layout: post
 title:  "关于Java中的哈希表HashMap,Hashtable等"
 date:   2012-07-27 10:10:00 +0800
-categories: Java
+categories: java
 ---
 **首先来了解一下基本概念**
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "小小年纪有主意"
 date: 2016-05-27 09:09:53 +0800
-categories: Life
+categories: life
 ---
 
 1. 大宝指着那个滴答几的火光说：“爸爸，看，小火花在跳舞。”

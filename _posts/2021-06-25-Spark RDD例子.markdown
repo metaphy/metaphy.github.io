@@ -2,7 +2,7 @@
 layout: post
 title: "Spark RDD例子"
 date: 2021-06-25 12:05:00 +0800
-categories: scala-spark
+categories: spark
 --- 
 
 Spark RDD是Spark的核心数据结构，代表不可变的/可以分区并行计算的数据集合。Spark RDD和DataFrame的关系如下：

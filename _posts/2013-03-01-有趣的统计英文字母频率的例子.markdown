@@ -2,7 +2,7 @@
 layout: post
 title:  "有趣的统计英文字母频率的例子"
 date:   2013-03-01 01:13:00 +0800
-categories: Java
+categories: java
 ---
 统计的是英文版"悲惨世界"，代码如下，使用ascii值做数组下标直接赋值：
 

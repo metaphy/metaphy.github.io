@@ -2,7 +2,7 @@
 layout: post
 title:  "Java程序员面试题目"
 date:   2007-06-21 16:25:00 +0800
-categories: programmer
+categories: java
 ---
 
 作者：metaphy

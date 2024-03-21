@@ -2,7 +2,7 @@
 layout: post
 title:  "Notepad++删空行"
 date:   2015-03-19 17:04:00 +0800
-categories: scripts
+categories: programmer
 ---
  
 {% highlight shell %}

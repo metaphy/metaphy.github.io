@@ -2,7 +2,7 @@
 layout: post
 title:  "随机密码生成"
 date:   2015-09-10 10:19:00 +0800
-categories: Java
+categories: java
 --- 
 
 {% highlight java %}

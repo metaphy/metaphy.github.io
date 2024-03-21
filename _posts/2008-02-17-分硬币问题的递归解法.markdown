@@ -2,7 +2,7 @@
 layout: post
 title:  "分硬币问题的递归解法"
 date:   2008-02-17 13:36:00 +0800
-categories: Java
+categories: java
 ---
 
 确定将一定数量的钱（以分为单位）转换成两角五分的硬币，一角硬币，五分和一分硬币的方法总数。

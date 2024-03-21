@@ -2,7 +2,7 @@
 layout: post
 title: "Markdown文件里插入一段音乐"
 date: 2022-10-18 10:58:00 +0800
-categories: scripts
+categories: programmer
 --- 
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=435288399&auto=1&height=66"></iframe>
 

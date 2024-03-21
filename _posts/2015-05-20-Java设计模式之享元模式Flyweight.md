@@ -2,7 +2,7 @@
 layout: post
 title: "Java设计模式之享元模式Flyweight"
 date: 2015-05-20 12:00:01 +0800
-categories: Java
+categories: java
 --- 
 
 享元模式(Flyweight Pattern)是一种结构型设计模式，**用于优化内存使用，它通过共享尽可能多的对象来减少内存占用**。 

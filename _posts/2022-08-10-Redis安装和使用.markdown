@@ -2,7 +2,7 @@
 layout: post
 title: "Redis安装和使用"
 date: 2022-08-10 21:00:00 +0800
-categories: redis
+categories: database
 --- 
 
 Redis是一个内存数据库（NoSQL数据库），可用作缓存，数据可以持久化到磁盘。

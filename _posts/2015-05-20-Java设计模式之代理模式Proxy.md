@@ -2,7 +2,7 @@
 layout: post
 title:  "Java设计模式之代理模式Proxy"
 date:   2015-05-20 11:00:00 +0800
-categories: Java
+categories: java
 --- 
 
 代理模式(Proxy)是一种非常常见的设计模式，它属于结构型模式，本身也非常好理解。义如其名，就是生活中的代理，譬如火车票代售点、房屋中介，或者下图中强健体育公司的联系方式。

@@ -2,7 +2,7 @@
 layout: post
 title:  "对JavaScript中原型的理解"
 date:   2007-06-18 18:31:00 +0800
-categories: Javascript
+categories: javascript
 ---
 
 从纯粹的面向对象思想(Java思想)向Javascript语言面向对象思想的转化，经历沉痛而惨烈。Javascript中对象和类的概念转化悄然不动声色，让人迷糊。有时候，对Java理解得越清楚，对Javascript理解起来就越费劲。尤其对Javascript的原型对象的理解颇费功夫。

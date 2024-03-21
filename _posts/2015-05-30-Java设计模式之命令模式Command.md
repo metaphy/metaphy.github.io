@@ -2,7 +2,7 @@
 layout: post
 title:  "Java设计模式之命令模式Command"
 date:   2015-05-30 12:30:00 +0800
-categories: Java
+categories: java
 --- 
 
 命令模式(Command Pattern)是一种行为设计模式，**它可将请求转换为一个包含与请求相关的所有信息的独立对象。该转换让你能根据不同的请求将方法参数化、 延迟请求执行或将其放入队列中， 且能实现可撤销操作**。

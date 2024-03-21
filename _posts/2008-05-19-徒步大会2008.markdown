@@ -2,7 +2,7 @@
 layout: post
 title:  "徒步大会2008"
 date:   2008-05-19 09:22:00 +0800
-categories: Life
+categories: life
 ---
 
 徒步大会。30km。本人历时7小时又10分钟走完。脚疼，累死。  

@@ -2,7 +2,7 @@
 layout: post
 title: "Java设计模式之责任链模式ChainOfResponsibility"
 date: 2015-05-30 12:00:01 +0800
-categories: Java
+categories: java
 --- 
 
 对于一个复杂请求的处理，我们可以这样做，**为避免请求发送者与请求处理者之间的耦合，将请求的处理分派给多个对象，这些对象连成一条链，请求沿着链条传递**，这个就是责任链模式(Chain of responsibility)。 Java servlet的Filter以及Structs中的拦截器都可以看作是这种模式；现实中，对于某些申请一般也是层层审批，也可以看作这种模式。

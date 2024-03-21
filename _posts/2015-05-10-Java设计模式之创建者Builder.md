@@ -2,7 +2,7 @@
 layout: post
 title:  "Java设计模式之创建者Builder"
 date:   2015-05-10 13:11:00 +0800
-categories: Java
+categories: java
 --- 
 
 创建者模式(Builder Pattern)**将一个复杂对象的构造过程和它的表现方式（representation）分离开来，使得同样的构造过程可以创造出不同的表示**。这里的不同的表现方式---用现实中的例子来讲---可以指：不同类型的电脑，一间房子不同的装修风格，麦当劳套餐不同的搭配方案等等。简而言之，创建者模式是对创建过程的抽象。

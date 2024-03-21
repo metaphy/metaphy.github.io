@@ -2,7 +2,7 @@
 layout: post
 title:  "徒步大会2011"
 date:   2011-05-21 19:37:00 +0800
-categories: Life
+categories: life
 ---
 
 4：30就起来了，有木有！！！！

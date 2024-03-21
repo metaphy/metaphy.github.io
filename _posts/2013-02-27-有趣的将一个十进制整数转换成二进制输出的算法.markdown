@@ -2,7 +2,7 @@
 layout: post
 title:  "有趣的将一个十进制整数转换成二进制输出的算法"
 date:   2013-02-27 00:20:00 +0800
-categories: Java
+categories: java
 ---
 原题是将一个十进制整数转换成二进制输出。
 

@@ -2,7 +2,7 @@
 layout: post
 title: "Spark经典的WordCount例子"
 date: 2021-11-06 20:00:00 +0800
-categories: scala-spark
+categories: spark
 --- 
 
 这是经典的Spark的WordCount的例子，演示了Spark分布式数据集的诸多方面，以及Map/Reduce的用法。
