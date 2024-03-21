@@ -20,10 +20,12 @@ categories: spark
 2. 又做了些工作，检查对方数据库中表的数据量，作为我这边的验证手段
 
 3. 再次检查代码，在数据sink前有一个preactions的参数，用来清空target表，看来是这个地方出问题了 
-	```glueContext.write_dynamic_frame.from_jdbc_conf(frame = df_1, catalog_connection = db_link_1, \
-		connection_options = {"preactions":"truncate table table_1", \
+	```
+		glueContext.write_dynamic_frame.from_jdbc_conf(frame = df_1, catalog_connection = db_link_1, \
+			connection_options = {"preactions":"truncate table table_1", \
 							"dbtable": "table_1", "database": "db_1"}, \
-								redshift_tmp_dir = some_tmp_dir)``` 
+								redshift_tmp_dir = some_tmp_dir)
+	``` 
 
 4. 因为程序并没有报错，所以只能模糊描述问题，在网上搜索答案。首先找到了stackoverflow上有人遇到个一模一样的问题，他的目标数据库是MySQL，只是光有问题没有答案。还有其他人有类似问题，但都没提供解决方案。
 	```https://stackoverflow.com/questions/61611845/preactionstruncate-table-is-not-working-in-gluecontext-write-dynamic-frame-fr
@@ -37,14 +39,14 @@ categories: spark
 
 8. 于是把df_1 转成 dataframe_df_1, 直接写：
 	```
-	dataframe_df_1.write.format("jdbc") \
-      .option("url", JDBC_URL) \
-      .option("dbtable", table_1) \
-      .option("user", user_1) \
-      .option("password", pwd_1) \
-      .option("driver", SQL_SERVER_DRIVER) \
-      .mode("overwrite") \
-      .save()
+		dataframe_df_1.write.format("jdbc") \
+		.option("url", JDBC_URL) \
+		.option("dbtable", table_1) \
+		.option("user", user_1) \
+		.option("password", pwd_1) \
+		.option("driver", SQL_SERVER_DRIVER) \
+		.mode("overwrite") \
+		.save()
 	```
-9. 因为SQL Server的JDBC URL 跟其他的还不一样，所以这个地方也卡了一下，到最终问题解决，已经过去4个多小时。这里首先要吐槽一下AWS Glue的代码，莫名其妙且烂，就看上面的函数方法，write_dynamic_frame.from_jdbc_conf，write不是对应的to吗？write...from是几个意思？最终的教训就是一定要做数据验证，数据条数，以及选择几条验证所有字段是不是有问题等等。 
+9. 因为SQL Server的JDBC URL 跟其他的还不一样，所以这个地方也卡了一下，到最终问题解决，已经过去4个多小时。这里首先要吐槽一下AWS Glue的代码，莫名其妙且烂，就看上面的函数方法，write_dynamic_frame.from_jdbc_conf，write不是对应的to吗？write...from是几个意思？最终的教训就是一定要做数据验证，验证数据条数，验证每个字段的值等等。 
 
