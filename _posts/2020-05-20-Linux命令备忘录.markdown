@@ -77,10 +77,15 @@ categories: linux
 	- `sha256sum test.tar`
 	- `sha512sum test.tar`
 
-19. npm
+19. windows OS sha256
+  - `certutil -hashfile test.zip SHA256`
+
+20. npm
   - `npm config get registry`
   - `npm config set registry https://registry.npmmirror.com`
 
-20. Uninstall a package
+21. Uninstall a package
 	- `dpkg --list`
 	- `sudo apt-get remove <package name> && sudo apt-get autoremove`
+
+
