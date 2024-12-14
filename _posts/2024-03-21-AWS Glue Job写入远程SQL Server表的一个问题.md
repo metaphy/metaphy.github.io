@@ -55,10 +55,11 @@ categories: spark
 10. 总结：这里首先要吐槽一下AWS Glue的代码，烂的莫名其妙，就看上面的函数方法，write_dynamic_frame.from_jdbc_conf，write不是对应的to吗？write...from是几个意思？到底是读是写？说实话，当初看到这个方法的时候差点被气笑了。从这个事情中，最终得到的教训就是一定要做数据验证，验证数据数量，验证每个字段的值等等；还有就是一定要远离这种垃圾的库，这种不成熟的东西包含特别多的坑。
 
 11. 2024-12-14更新。最近发现这个很可能是id权限不够的问题。id的delete权限和truncate权限一般不是一个，比如redshift上delete是单独权限，而truncate权限等同于表owner权限。查了一下，SQL Server上对表delete和truncate操作也是分开的授权：
-```
--- DELETE 
-GRANT DELETE ON qa.test1 TO user1;
 
---TRUNCATE
-GRANT ALTER ON qa.test1 TO user1;
-```
+	```
+	::DELETE 
+	GRANT DELETE ON qa.test1 TO user1;
+
+	::TRUNCATE
+	GRANT ALTER ON qa.test1 TO user1;
+	```
