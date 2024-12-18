@@ -5,17 +5,22 @@ date:   2020-05-22 16:39:00 +0800
 categories: linux
 --- 
 
+Based on my ubuntu:  
+
 1. Shutdown
 	- `shutdown now`
 	- `shutdown -r now`
 	- `sudo shutdown -h now`
 
-2. Ubuntu System info:
+2. Ubuntu OS info and hardwares:
 	- `lsb_release -a` 
 	- `cat /proc/version`
 	- `cat /etc/redhat-release`
 	- `cat /proc/meminfo`
 	- `cat /proc/cpuinfo | grep cores | uniq`
+	- `lspci | grep VGA`
+	- `lspci | grep 3D`
+	
 3. Disk:
 	- `df -h`
 	- `du -h --max-depth=1` 
@@ -85,7 +90,11 @@ categories: linux
   - `npm config set registry https://registry.npmmirror.com`
 
 21. Uninstall a package
-	- `dpkg --list`
-	- `sudo apt-get remove <package name> && sudo apt-get autoremove`
+  - `dpkg --list`
+  - `sudo apt-get remove <package name> && sudo apt-get autoremove`
+
+22. generate rsa keys 
+  - `ssh-keygen`
 
 
+  
