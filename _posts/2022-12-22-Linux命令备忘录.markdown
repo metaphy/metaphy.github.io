@@ -93,8 +93,10 @@ Based on my ubuntu:
   - `dpkg --list`
   - `sudo apt-get remove <package name> && sudo apt-get autoremove`
 
-22. generate rsa keys 
+22. generate rsa keys and add rsa key to system
   - `ssh-keygen`
+  - `ssh-add /home/peter/.ssh/rsa_private`
 
-
-  
+23. git config 
+  - `git config --global user.email "your_email@example.com"`  
+  - `git config --global user.name "your_name"`  
