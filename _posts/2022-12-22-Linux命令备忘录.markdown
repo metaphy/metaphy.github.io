@@ -95,6 +95,7 @@ Based on my ubuntu:
 
 22. generate rsa keys and add rsa key to system
   - `ssh-keygen`
+  - `eval $(ssh-agent -s)`
   - `ssh-add /home/peter/.ssh/rsa_private`
 
 23. git config 
