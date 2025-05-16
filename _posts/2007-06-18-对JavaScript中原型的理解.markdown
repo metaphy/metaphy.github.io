@@ -62,7 +62,7 @@ var circ = new Circle(0,0,2) ;
 alert(circ.area()) ;   
 {% endhighlight %}
 
-两者的调用代码完全一样，那为什么要使用原型呢？我感觉主要是为了解决对内部类型的继承问题，也就是说当你无法修改String的构造函数而想要让所有String实例都具有某一方法的时候，你可以用这个prototype；或者说，你用这个prototype来模拟实现String类的子类，达到对父类进行扩展的目的。
+两者的调用代码完全一样，那为什么要使用原型呢？我感觉主要是为了解决对内部类型的继承问题，也就是说当你无法修改String的构造函数而想要让所有String实例都具有某一方法的时候，你可以用这个prototype；或者说，你用这个prototype来模拟实现String类的子类，达到对父类进行扩展的目的。也就是，让JavaScript拥有一些面向对象的能力。
 
  
 

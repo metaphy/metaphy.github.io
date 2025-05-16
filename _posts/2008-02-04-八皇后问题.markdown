@@ -57,3 +57,928 @@ public class Queens {
     }  
 }  
 {% endhighlight %}
+
+一共找到92个解
+
+```
+1
+ x o o o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o x o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o x o o o o
+=================
+2
+ x o o o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o o x o o o o o
+ o o o o o o x o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o x o o o
+=================
+3
+ x o o o o o o o
+ o o o o o o x o
+ o o o x o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o o x o o o
+ o o x o o o o o
+=================
+4
+ x o o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o x o o o o
+ o o o o o x o o
+ o o x o o o o o
+=================
+5
+ o x o o o o o o
+ o o o x o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+=================
+6
+ o x o o o o o o
+ o o o o x o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o o x o o o o
+=================
+7
+ o x o o o o o o
+ o o o o x o o o
+ o o o o o o x o
+ o o o x o o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o x o o o o o
+=================
+8
+ o x o o o o o o
+ o o o o o x o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o x o o o o
+ o o o o o o o x
+ o o x o o o o o
+ o o o o x o o o
+=================
+9
+ o x o o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o o x o o o o o
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o o x o
+ o o o o x o o o
+=================
+10
+ o x o o o o o o
+ o o o o o o x o
+ o o x o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o o o o x o o o
+ x o o o o o o o
+ o o o x o o o o
+=================
+11
+ o x o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o x o o
+ o o x o o o o o
+=================
+12
+ o x o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o x o o o
+ o o o o o o x o
+ o o o x o o o o
+=================
+13
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o x o o o o
+ o o o o o x o o
+=================
+14
+ o o x o o o o o
+ o o o o x o o o
+ o x o o o o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o o o o x o
+ o o o x o o o o
+ o o o o o x o o
+=================
+15
+ o o x o o o o o
+ o o o o x o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o o x o o o o
+ o o o o o o x o
+ x o o o o o o o
+=================
+16
+ o o x o o o o o
+ o o o o x o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+=================
+17
+ o o x o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ o o o x o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o x o o
+=================
+18
+ o o x o o o o o
+ o o o o o x o o
+ o x o o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o o o o x o
+ o o o x o o o o
+=================
+19
+ o o x o o o o o
+ o o o o o x o o
+ o x o o o o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o o o x
+ o o o o x o o o
+=================
+20
+ o o x o o o o o
+ o o o o o x o o
+ o x o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o x o o o o
+=================
+21
+ o o x o o o o o
+ o o o o o x o o
+ o o o x o o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o o x o o o
+ o o o o o o x o
+ o x o o o o o o
+=================
+22
+ o o x o o o o o
+ o o o o o x o o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o x o o o
+ o o o o o o x o
+ x o o o o o o o
+=================
+23
+ o o x o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o x o o o o o o
+=================
+24
+ o o x o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o o x o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o x o o o o
+=================
+25
+ o o x o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o x o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+=================
+26
+ o o x o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o x o o o
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o x o o
+=================
+27
+ o o x o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o o x o o o o
+ x o o o o o o o
+ o o o o x o o o
+=================
+28
+ o o x o o o o o
+ o o o o o o o x
+ o o o x o o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o o o o x o o
+ o x o o o o o o
+ o o o o x o o o
+=================
+29
+ o o o x o o o o
+ x o o o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o o o o x o
+ o o x o o o o o
+ o o o o o x o o
+=================
+30
+ o o o x o o o o
+ x o o o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o x o o o o o
+ o o o o o o x o
+ o x o o o o o o
+=================
+31
+ o o o x o o o o
+ o x o o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ o o o o o x o o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o o x o
+=================
+32
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o x o
+ o o x o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o o x o o o
+=================
+33
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o x o
+ o o x o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o o o o x o o o
+ x o o o o o o o
+=================
+34
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o x o o o o o
+=================
+35
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o x o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o x o o
+=================
+36
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o x o o o
+ o o o o o o x o
+=================
+37
+ o o o x o o o o
+ o o o o o x o o
+ x o o o o o o o
+ o o o o x o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o x o o o o o
+ o o o o o o x o
+=================
+38
+ o o o x o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o x o o o
+=================
+39
+ o o o x o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o x o o o o o o
+=================
+40
+ o o o x o o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o o o o o o x
+ o o o o x o o o
+ o x o o o o o o
+ o o o o o x o o
+ o o x o o o o o
+=================
+41
+ o o o x o o o o
+ o o o o o o x o
+ o o x o o o o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o o x o o o
+ x o o o o o o o
+ o o o o o x o o
+=================
+42
+ o o o x o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o x o o o o o o
+ o o o o o x o o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o o o x
+=================
+43
+ o o o x o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o x o o o o o o
+=================
+44
+ o o o x o o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o x o o
+ o x o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+=================
+45
+ o o o x o o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o o x o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o x o o
+ o o x o o o o o
+=================
+46
+ o o o x o o o o
+ o o o o o o o x
+ o o o o x o o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o x o o
+=================
+47
+ o o o o x o o o
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o o o o x o
+ o o x o o o o o
+=================
+48
+ o o o o x o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o x o
+ o o x o o o o o
+ o o o o o x o o
+=================
+49
+ o o o o x o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o x o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o x o o o o
+=================
+50
+ o o o o x o o o
+ o x o o o o o o
+ o o o x o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o x o
+=================
+51
+ o o o o x o o o
+ o x o o o o o o
+ o o o x o o o o
+ o o o o o o x o
+ o o x o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ x o o o o o o o
+=================
+52
+ o o o o x o o o
+ o x o o o o o o
+ o o o o o x o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o x o o o o
+ o o o o o o o x
+ o o x o o o o o
+=================
+53
+ o o o o x o o o
+ o x o o o o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o o x o
+ o o x o o o o o
+ o o o o o x o o
+=================
+54
+ o o o o x o o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o x o o o o
+ o o o o o o x o
+=================
+55
+ o o o o x o o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o o x o o o o
+=================
+56
+ o o o o x o o o
+ o o x o o o o o
+ o o o o o o o x
+ o o o x o o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o o o o x o o
+ o x o o o o o o
+=================
+57
+ o o o o x o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o o x o o o o
+ o x o o o o o o
+=================
+58
+ o o o o x o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o x o o o o o
+=================
+59
+ o o o o x o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o x o o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o x o o
+=================
+60
+ o o o o x o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o x o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o o o x
+=================
+61
+ o o o o x o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o x o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o x o o o o
+=================
+62
+ o o o o x o o o
+ o o o o o o x o
+ o o o x o o o o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o x o o o o o o
+=================
+63
+ o o o o x o o o
+ o o o o o o o x
+ o o o x o o o o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o x o o
+ o x o o o o o o
+ o o o o o o x o
+=================
+64
+ o o o o x o o o
+ o o o o o o o x
+ o o o x o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o x o o
+ o o x o o o o o
+=================
+65
+ o o o o o x o o
+ x o o o o o o o
+ o o o o x o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o x o o o o o
+ o o o o o o x o
+ o o o x o o o o
+=================
+66
+ o o o o o x o o
+ o x o o o o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ o o o x o o o o
+=================
+67
+ o o o o o x o o
+ o x o o o o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o o o x
+ o o o o x o o o
+ o o x o o o o o
+=================
+68
+ o o o o o x o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o x o o o o
+=================
+69
+ o o o o o x o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+=================
+70
+ o o o o o x o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o o x o o o
+ o x o o o o o o
+ o o o x o o o o
+ o o o o o o x o
+=================
+71
+ o o o o o x o o
+ o o x o o o o o
+ o o o o x o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o o x
+=================
+72
+ o o o o o x o o
+ o o x o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o x o
+=================
+73
+ o o o o o x o o
+ o o x o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o x o o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o o o x o o o
+=================
+74
+ o o o o o x o o
+ o o x o o o o o
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o x o o o
+ x o o o o o o o
+ o o o x o o o o
+=================
+75
+ o o o o o x o o
+ o o x o o o o o
+ o o o o o o x o
+ o o o x o o o o
+ x o o o o o o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o o x o o o
+=================
+76
+ o o o o o x o o
+ o o o x o o o o
+ x o o o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o o o o x o
+ o o x o o o o o
+=================
+77
+ o o o o o x o o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o x o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o x o o o o o
+=================
+78
+ o o o o o x o o
+ o o o x o o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o x o o o
+ o x o o o o o o
+ o o o o o o o x
+=================
+79
+ o o o o o x o o
+ o o o x o o o o
+ o o o o o o x o
+ x o o o o o o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o o x o o o
+ o o x o o o o o
+=================
+80
+ o o o o o x o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o x o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o o x o o o o o
+=================
+81
+ o o o o o o x o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o x o o o
+=================
+82
+ o o o o o o x o
+ o x o o o o o o
+ o o o x o o o o
+ x o o o o o o o
+ o o o o o o o x
+ o o o o x o o o
+ o o x o o o o o
+ o o o o o x o o
+=================
+83
+ o o o o o o x o
+ o x o o o o o o
+ o o o o o x o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o x o o o o
+ o o o o o o o x
+ o o o o x o o o
+=================
+84
+ o o o o o o x o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o o o o x o o o
+ o x o o o o o o
+ o o o x o o o o
+=================
+85
+ o o o o o o x o
+ o o x o o o o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o o x o o o
+ x o o o o o o o
+ o o o o o x o o
+ o o o x o o o o
+=================
+86
+ o o o o o o x o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o x o o o
+ o o o o o o o x
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o x o o
+=================
+87
+ o o o o o o x o
+ o o o x o o o o
+ o x o o o o o o
+ o o o o o o o x
+ o o o o o x o o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o x o o o
+=================
+88
+ o o o o o o x o
+ o o o o x o o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o x o o
+ o o o o o o o x
+ o x o o o o o o
+ o o o x o o o o
+=================
+89
+ o o o o o o o x
+ o x o o o o o o
+ o o o x o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+ o o x o o o o o
+ o o o o o x o o
+=================
+90
+ o o o o o o o x
+ o x o o o o o o
+ o o o o x o o o
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o o x o
+ o o o x o o o o
+ o o o o o x o o
+=================
+91
+ o o o o o o o x
+ o o x o o o o o
+ x o o o o o o o
+ o o o o o x o o
+ o x o o o o o o
+ o o o o x o o o
+ o o o o o o x o
+ o o o x o o o o
+=================
+92
+ o o o o o o o x
+ o o o x o o o o
+ x o o o o o o o
+ o o x o o o o o
+ o o o o o x o o
+ o x o o o o o o
+ o o o o o o x o
+ o o o o x o o o
+=================
+```
