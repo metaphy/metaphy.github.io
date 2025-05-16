@@ -13,7 +13,7 @@ categories: spark
 
 对方数据库和表建好之后，拿到credentials，就把数据推送过去了，发现数据有点小问题，就又推送了一遍，告诉对方推送过去的数据量，让他们检查一下。 
 
-不出意外的，意外发生了，对方告诉我收到了2N条数据，多了一份。于是，我们开头所说的时间花费，开始花了。
+不出意外的，意外发生了，对方告诉我收到了2n条数据，多了一份。于是，我们开头所说的时间花费，开始花了。
 
 1. 我先仔细检查了代码，并未有什么问题，又在我测试数据库测试了一遍，也没有问题，每次刷新数据前都能清空之前数据，并不会让数据成倍增加
 
@@ -54,12 +54,12 @@ categories: spark
 
 10. 总结：这里首先要吐槽一下AWS Glue的代码，烂的莫名其妙，就看上面的函数方法，write_dynamic_frame.from_jdbc_conf，write不是对应的to吗？write...from是几个意思？到底是读是写？说实话，当初看到这个方法的时候差点被气笑了。从这个事情中，最终得到的教训就是一定要做数据验证，验证数据数量，验证每个字段的值等等；还有就是一定要远离这种垃圾的库，这种不成熟的东西包含特别多的坑。
 
-11. 2024-12-14更新。最近发现这个很可能是id权限不够的问题。id的delete权限和truncate权限一般不是一个，比如redshift上delete是单独权限，而truncate权限等同于表owner权限。查了一下，SQL Server上对表delete和truncate操作也是分开的授权：
+11. 2024-12-14更新。最近发现这个很可能是id权限不够的问题。id的delete权限和truncate权限一般不是一个，比如redshift上delete是单独权限，而truncate权限等同于表owner权限。查了一下，SQL Server上对表delete和truncate操作也是分开的授权。如果真是这个问题，那么dynamic_frame在写数据的时候遇到没有权限的问题不报错而继续执行，也是非常奇葩了。
 
 	```
-	::DELETE 
+	--SQL Server delete: 
 	GRANT DELETE ON qa.test1 TO user1;
 
-	::TRUNCATE
+	-- truncate authorization	
 	GRANT ALTER ON qa.test1 TO user1;
 	```
