@@ -28,7 +28,7 @@ categories: spark
 			redshift_tmp_dir = some_tmp_dir)
 	``` 
 
-4. 因为程序并没有报错，所以只能模糊描述问题，在网上搜索答案。首先找到了stackoverflow上有人遇到个一模一样的问题，他的目标数据库是MySQL，只是光有问题没有答案。还有其他人有类似问题，但都没提供解决方案。
+4. 因为程序并没有报错，所以只能模糊描述问题，在网上搜索答案。首先找到了stackoverflow上有人遇到个一模一样的问题，他的目标数据库是MySQL，只是光有问题没有答案。还有其他人有类似问题，但都没提供解决方案。  
     `https://stackoverflow.com/questions/61611845/preactionstruncate-table-is-not-working-in-gluecontext-write-dynamic-frame-fr`
 
     `https://repost.aws/questions/QUR4mvZ1NUQvKof115XSOxPg/aws-glue-s3-to-redshift-etl-job-ignored-preactions-and-postactions`

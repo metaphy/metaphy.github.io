@@ -9,9 +9,9 @@ categories: python
 
 Python 3
 
-```
+{% highlight shell %}
 $ cd server1
 $ python -m http.server 8888
-```
+{% endhighlight %}
 
 所谓编程的乐趣，大概就是总能碰到这种令人“大吃一惊 & 还能这么干？”的时刻。

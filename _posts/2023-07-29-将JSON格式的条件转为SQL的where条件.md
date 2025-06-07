@@ -6,7 +6,7 @@ categories: java
 --- 
 
 有一需求，输入是JSON格式的条件，输出是SQL的where格式的条件。譬如输入：
-```
+{% highlight javascript %}
 {
   "conditions" : [
     {
@@ -27,13 +27,13 @@ categories: java
   ],
   "joint" : "and"
 }
-```
+{% endhighlight %}
 输出：
 ```
 ((a like '%a%') and (b not Like '%b%') and (c greaterThanOrEqualTo "2023-01-01"))
 ```
 如果条件是嵌套条件，输出同样需要，譬如输入：
-```
+{% highlight javascript %}
 {
   "conditions" : [
     {
@@ -69,7 +69,7 @@ categories: java
   ],
   "joint" : "and"
 } 
-```
+{% endhighlight %}
 输出：
 ```
 ((((a like '%a%') and (b not Like '%b%')) or (c not Equals 1000)) and (d lessThan "2023-01-01"))
