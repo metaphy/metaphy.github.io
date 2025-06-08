@@ -42,7 +42,6 @@ plugins:
 #
 exclude:
   - draft/
-  - images/
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
