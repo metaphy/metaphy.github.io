@@ -29,9 +29,11 @@ categories: java
 }
 {% endhighlight %}
 输出：
-```
+{% highlight sql %}
 ((a like '%a%') and (b not Like '%b%') and (c greaterThanOrEqualTo "2023-01-01"))
-```
+{% endhighlight %}
+
+  
 如果条件是嵌套条件，输出同样需要，譬如输入：
 {% highlight javascript %}
 {
@@ -71,9 +73,9 @@ categories: java
 } 
 {% endhighlight %}
 输出：
-```
+{% highlight sql %}
 ((((a like '%a%') and (b not Like '%b%')) or (c not Equals 1000)) and (d lessThan "2023-01-01"))
-```
+{% endhighlight %}
 
 第一反应是使用栈，程序如下：
 {% highlight java %}
@@ -112,14 +114,19 @@ public class JsonToSqlConditions {
                 stack.push("(");
             }
 
-            if (line.contains("\"field\"") || line.contains("\"operator\"") ||line.contains("\"values\"")) {
+            if (line.contains("\"field\"") 
+                  || line.contains("\"operator\"") 
+                  ||line.contains("\"values\"")) {
                 if(condition == null ){
                     condition = new Condition();
                 }
                 condition = setCondition(line, condition);
 
                 if (isConditionDone(condition)){
-                    String condStr = String.format("(%s %s %s)", condition.field, condition.operator, condition.values);
+                    String condStr = String.format("(%s %s %s)", 
+                        condition.field, 
+                        condition.operator, 
+                        condition.values);
                     stack.push(condStr);
                     condition = null;
                 }
@@ -153,10 +160,13 @@ public class JsonToSqlConditions {
     }
 
     private boolean isConditionDone(Condition cond) {
-        return !cond.operator.isEmpty() && !cond.field.isEmpty() && !cond.values.isEmpty() ;
+        return !cond.operator.isEmpty() 
+          && !cond.field.isEmpty() 
+          && !cond.values.isEmpty() ;
     }
 
-    private Condition setCondition(String line, Condition cond) throws Exception {
+    private Condition setCondition(String line, Condition cond) 
+            throws Exception {
         String[] kv = line.split(":");
         String key = "", value = "";
 
@@ -181,7 +191,8 @@ public class JsonToSqlConditions {
         }
 
         if (key.equals("values")) {
-            Pattern pattern = Pattern.compile("\\[([^\\]]*)\\]");   // starts with '[' and ends with ']'
+            // starts with '[' and ends with ']'
+            Pattern pattern = Pattern.compile("\\[([^\\]]*)\\]"); 
             Matcher matcher = pattern.matcher(value);
 
             if (matcher.find()) {

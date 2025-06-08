@@ -22,19 +22,19 @@ WebSocket常用于实时聊天、在线游戏、股票行情等需要实时数�
 **下文使用Node.js来演示WebSocket的使用，例子是服务器以一定频率向客户端推送某种商品成交额的信息。**
 
 首先创建项目文件夹，并使用npm初始化（npm init时，使用默认选项就好）:
-```
+{% highlight javascript %}
 cd WebSocketDealAmountDemoServer
 npm init
-```
+{% endhighlight %}
 
 我们还需要引入WebSocket lib 'ws'，使用npm安装，--save 表示这个库会添加到package.json打包文件中：
-```
+{% highlight javascript %}
 npm install ws --save
-```
+{% endhighlight %}
 
 我们使用deals.json作为数据源，还要使用一个HTML5页面来作为client去测试它。项目的文件结构如下：
 
-```
+{% highlight javascript %}
 WebSocketDealAmountDemoServer
   node_modules
     ws
@@ -43,21 +43,21 @@ WebSocketDealAmountDemoServer
   package-lock.json
   package.json
   test-client.html
-```
+{% endhighlight %}
 
 着重分析一下作为服务器程序的index.js. 引入和初始化WebSocketServer之后，该server自动监控connection事件，connection的响应可以非常简单，譬如：
 
-```
+{% highlight javascript %}
 const WebSocketServer = require('ws').Server
 const wss = new WebSocketServer({port: 8080})
 
 wss.on('connection', (ws) => {
   ws.send('Hello, world!')
 })
-```
+{% endhighlight %}
 
 在建立连接后，除了初始的'Hello, world'，还可以监听message事件，响应Client发过来的信息：
-```
+{% highlight javascript %}
 wss.on('connection', (ws) => {
   ws.send(getConnectedEvent())
  
@@ -65,10 +65,10 @@ wss.on('connection', (ws) => {
     console.log('Received the message from client: ' + message)
   })
 })
-```
+{% endhighlight %}
 
 最终，我们使用setInterval以一定频率，比如每5秒一次向client 发送消息，并且在connection关闭时，清理这个interval:
-```
+{% highlight javascript %}
 ws.dealUpdateInterval = setInterval(() => {
   if (connectionInfo.productsToMonitor.length > 0) {
     ws.send(getDealsUpdateEvent(connectionInfo))
@@ -79,10 +79,10 @@ ws.dealUpdateInterval = setInterval(() => {
 ws.on('close', () => {
   clearInterval(ws.dealUpdateInterval)
 })
-```
+{% endhighlight %}
 
 为了确保在网络出问题时，server端不会长时间持有这个连接，server端使用定期ping 客户端的方式，在多次ping而无响应时，server将会关闭这个connection，下面的演示只是一次ping不通就断开的情况：
-```
+{% highlight javascript %}
 ws.pingInterval = setInterval(() =>{
   if(connectionInfo.isActive) {
     //set it to false, once ping get a pong, set it back to true
@@ -96,26 +96,26 @@ ws.pingInterval = setInterval(() =>{
 ws.connectionTimeout = setTimeout(() => {
   disconnect(ws, 'Automatically disconnected after some time')
 }, 300000)
-```
+{% endhighlight %}
 
 That's it! 这个就是server部分的核心代码了。client端使用一个HTML5页面，code非常简单，比当年手写Ajax要简单，所以不再解释。值的注意的是，在测试前，我们需要先检查浏览器是否支持WebSocket对象，好在目前新版本的Chrome, Firefox, Edge 均支持：
-```
+{% highlight javascript %}
 if(!window.WebSocket) {   
   console.log('WebSocket is NOT supported!')   
 }
-```
+{% endhighlight %}
 
 为了更清晰的打印带有timestamp的log，使用下面debug函数代替console.log
-```
+{% highlight javascript %}
 function debug(info) {
   console.log(new Date().toISOString() + ': ' + info)
 }
-```
+{% endhighlight %}
 
 然后我们设计整个测试流程。首先启动server:
-```
+{% highlight javascript %}
 node index
-```
+{% endhighlight %}
 然后在浏览器中打开test-client.html, 并打开console. 
 
 第0秒：客户端连接服务器，连接成功后收到服务器返回的'connected'信息；之后，服务器会以5秒的频率发送商品的交易额信息
@@ -137,7 +137,7 @@ node index
 第30秒：服务器主动断开连接，客户端显示close信息：Server disconnected! Bye~~
 
 整个log显示出的相应信息，与我们的测试设计完全符合：
-```
+{% highlight javascript %}
 2023-09-16T04:01:00.373Z: WebSocket object is created
 2023-09-16T04:01:00.385Z: ****Connection Successfully****
 2023-09-16T04:01:00.387Z: Received: {"event":"connected","products":["WLQ","QDLHT"],"message":"Connected to the server"}
@@ -149,12 +149,12 @@ node index
 2023-09-16T04:01:20.427Z: Received: {"event":"deal-update","deals":{"QDLHT":462.99}}
 2023-09-16T04:01:25.430Z: Received: {"event":"deal-update","deals":{"QDLHT":417.63}}
 2023-09-16T04:01:30.400Z: Server disconnected! Bye~~
-```
+{% endhighlight %}
 
 最后代码附下，需要注意的是为了保持代码简洁，必要的输入信息检测和错误处理都省略了，实际开发中不能省。
 
 deals.json
-```
+{% highlight javascript %}
 [
     {
         "productId": "WLQ",
@@ -249,10 +249,10 @@ deals.json
         ]
     }
 ]
-```
+{% endhighlight %}
 
 index.js
-```
+{% highlight javascript %}
 const fs = require('fs')
 const WebSocketServer = require('ws').Server
 
@@ -320,7 +320,8 @@ const getDealsUpdateEvent = (connectionInfo) => {
       if (connectionInfo.productsUpdateCount >= dealsDataLength) {
         connectionInfo.productsUpdateCount = 0
       }
-      event.deals[productId] = deal.dealsData[connectionInfo.productsUpdateCount].price
+      event.deals[productId] = 
+          deal.dealsData[connectionInfo.productsUpdateCount].price
     }
   })
   return JSON.stringify(event)
@@ -389,10 +390,10 @@ wss.on('connection', (ws) => {
 function debug(info) {
   console.log(new Date().toISOString() + ': ' + info)
 }
-```
+{% endhighlight %}
 
 test-client.html
-```
+{% highlight html %}
 <!DOCTYPE html>
 <html>
 <head> 
@@ -456,5 +457,5 @@ function debug(info) {
 </body>
 
 </html>
-```
+{% endhighlight %}
 
