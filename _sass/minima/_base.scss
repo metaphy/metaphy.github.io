@@ -132,10 +132,10 @@ blockquote {
   color: $grey-color;
   border-left: 4px solid $grey-color-light;
   padding-left: $spacing-unit / 2;
-  @include relative-font-size(1.125);
-  letter-spacing: -1px;
-  font-style: italic;
-
+  background-color: $block-bg-color;
+  border-radius: 2px;
+  margin: 1px 0;
+  
   > :last-child {
     margin-bottom: 0;
   }
@@ -145,14 +145,14 @@ blockquote {
 
 /**
  * Code formatting
- */
+ */ 
 pre,
 code {
-  @include relative-font-size(0.9375);
   font-family: $code-font-family;
+  font-size: $base-font-size - 1px;
   border: 1px solid $grey-color-light;
   border-radius: 3px;
-  background-color: #eef;
+  background-color: $code-bg-color;
 }
 
 code {
@@ -169,6 +169,7 @@ pre {
     padding-left: 0;
   }
 }
+
 
 
 
