@@ -5,7 +5,7 @@ date: 2016-02-21 10:20:02 +0800
 categories: java
 ---
 
-```
+{% highlight xml %}
 <configuration>
     <!-- Console appender configuration -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -36,4 +36,4 @@ categories: java
         <appender-ref ref="FILE" />
     </root>
 </configuration>
-```
+{% endhighlight %}
