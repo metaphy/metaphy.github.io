@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Google Gemini体验"
-date:   2025-06-10 20:10:00 +0800
-categories: rust
+date:   2025-06-27 18:00:00 +0800
+categories: llm
 ---
 
 大语言模型推出后，搜索引擎公司明显感受到了威胁，很明显，很多情况下，向大模型提问就可以了，减少大量的搜索引擎查询。Google最近发力了，推出Gemini 2.5 pro，包含CLI和API等用法，并且免费力度非常大！
