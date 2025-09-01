@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[翻译]Closure:挑战你对Java的想象力"
+title:  "[翻译]Clojure:挑战你对Java的想象力"
 date:   2009-08-31 07:15:00 +0800
 categories: translations
 ---
