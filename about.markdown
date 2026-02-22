@@ -15,4 +15,4 @@ permalink: /about/
 *   **运维**: 丰富的Linux服务器配置、网络管理经验。Docker容器部署与Kubernetes编排平台运维经验。
 
 #### 联系方式:  
-*   moonlinking AT 126 DOT COM
+*   wx id: peterm002
