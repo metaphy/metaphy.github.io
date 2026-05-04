@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Java设计模式之外观模式Facade"
-date:   2015-05-20 14:00:01 +0800
+date:   2015-05-20 15:00:01 +0800
 categories: java
 --- 
 
