@@ -27,7 +27,6 @@ int level = dis.readInt();
 
 以咖啡举例子。我们有基础款咖啡，以及在基础款之上加料(装饰)，以实现各种不同种类的咖啡。
 {% highlight java %}
-
 public interface Coffee {
     String getDescription();
     double getCost();
@@ -45,8 +44,7 @@ public class SimpleCoffee implements Coffee {
     }
 }
 
-
-关键点： 它必须实现 Coffee 接口，并持有一个 Coffee 对象的引用。
+// 装饰器的关键点：它必须实现 Coffee 接口，并持有一个 Coffee 对象的引用。
 public abstract class CoffeeDecorator implements Coffee {
     protected final Coffee decoratedCoffee;
 
@@ -63,27 +61,9 @@ public abstract class CoffeeDecorator implements Coffee {
     }
 }
 
-通过装饰器，我们可以在不修改 SimpleCoffee 的情况下增加“牛奶”和“糖”。
-// 牛奶装饰器
-public class MilkDecorator extends CoffeeDecorator {
-    public MilkDecorator(Coffee coffee) {
-        super(coffee);
-    }
-
-    @Override
-    public String getDescription() {
-        return super.getDescription() + ", 加奶";
-    }
-
-    @Override
-    public double getCost() {
-        return super.getCost() + 5.0;
-    }
-}
-
-// 糖装饰器
-public class SugarDecorator extends CoffeeDecorator {
-    public SugarDecorator(Coffee coffee) {
+// 通过装饰器，我们可以在不修改 SimpleCoffee 的情况下增加“牛奶”和“糖”。
+class SugarCoffee extends CoffeeDecorator {
+    public SugarCoffee(Coffee coffee) {
         super(coffee);
     }
 
@@ -98,23 +78,41 @@ public class SugarDecorator extends CoffeeDecorator {
     }
 }
 
-public class ArchitectDemo {
+class MilkCoffee extends CoffeeDecorator {
+    public MilkCoffee(Coffee coffee) {
+        super(coffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + ", 加奶";
+    }
+
+    @Override
+    public double getCost() {
+        return super.getCost() + 3.0;
+    }
+}
+
+public class CoffeeDemo {
     public static void main(String[] args) {
         // 1. 想要一杯纯咖啡
         Coffee coffee = new SimpleCoffee();
-        
+
         // 2. 加点奶 (装饰一次)
-        coffee = new MilkDecorator(coffee);
-        
+        coffee = new MilkCoffee(coffee);
+
         // 3. 再加点糖 (再装饰一次)
-        coffee = new SugarDecorator(coffee);
+        coffee = new SugarCoffee(coffee);
 
         System.out.println("订单内容: " + coffee.getDescription());
         System.out.println("最终价格: ￥" + coffee.getCost());
     }
 }
 {% endhighlight %}
+
 输出结果:
 ```
---- 开始 
+订单内容: 基础款咖啡, 加奶, 加糖
+最终价格: ￥15.0
 ```
