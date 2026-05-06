@@ -114,3 +114,5 @@ Smart Phone calling
  --calling from XiaoMi!
  {% endhighlight %}
  
+
+{% include design-pattern-contents.html %} 

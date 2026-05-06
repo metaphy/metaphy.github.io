@@ -125,3 +125,5 @@ public class CompositeDemo {
 Box 1 price: 3.0
 Box 2 price: 15.0
 ```
+
+{% include design-pattern-contents.html %}

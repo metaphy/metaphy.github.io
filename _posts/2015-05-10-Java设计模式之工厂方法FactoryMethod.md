@@ -78,3 +78,5 @@ if (factory != null) {
     operationResult = op.execute(leftText, rightText);
 }
 {% endhighlight %}
+
+{% include design-pattern-contents.html %}

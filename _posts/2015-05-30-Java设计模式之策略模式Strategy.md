@@ -114,3 +114,5 @@ Pick the item: Item 1
 Pick the item: Item 0
 Pick the item: Item 3
 {% endhighlight %} 
+
+{% include design-pattern-contents.html %}

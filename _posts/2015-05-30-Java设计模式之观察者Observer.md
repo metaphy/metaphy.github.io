@@ -66,3 +66,5 @@ Observer Moji App receives message: Lowest temperatures will be 12 degrees Celsi
 Observer Airport receives message: Lowest temperatures will be 12 degrees Celsius
 Observer Local TV Station receives message: Lowest temperatures will be 12 degrees Celsius
 {% endhighlight %} 
+
+{% include design-pattern-contents.html %}

@@ -201,3 +201,5 @@ Coffee is selected!
   --Payment Failed!
   --Current item is: Coffee; you are not in ReadState so you cannot select another one!
 {% endhighlight %} 
+
+{% include design-pattern-contents.html %}

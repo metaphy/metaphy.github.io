@@ -132,3 +132,5 @@ Light is Off!
 Light is On...
 -- Change the color to Yellow
 ```
+
+{% include design-pattern-contents.html %}

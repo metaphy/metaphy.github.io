@@ -97,3 +97,5 @@ Payment is done!
 Start shipping ...
 End shipment!
 {% endhighlight %}
+
+{% include design-pattern-contents.html %}

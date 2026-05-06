@@ -72,3 +72,5 @@ public class PrototypeDemo {
 是否为同一个实例? false
 名字是否相同? true
 ```
+
+{% include design-pattern-contents.html %}

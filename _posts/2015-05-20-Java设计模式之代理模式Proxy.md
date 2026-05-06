@@ -81,3 +81,5 @@ public class ProxyDemo {
 Strength Sports Corp. Contact number: 0411-88afcv01
 Strength Sports Corp. New Contact number: 131-a0kb-ad05
 {% endhighlight %} 
+
+{% include design-pattern-contents.html %}

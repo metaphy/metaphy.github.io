@@ -34,3 +34,5 @@ public class DatabaseConnection {
     }
 }
 {% endhighlight %}
+
+{% include design-pattern-contents.html %}

@@ -63,3 +63,5 @@ public class AdapterDemo {
 适配器：转换完成，输出电压 5V
 手机状态：已接收 5V，充电中...
 ```
+
+{% include design-pattern-contents.html %}

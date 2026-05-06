@@ -131,32 +131,4 @@ Authentication Pass!
 Drinks: Water, Milk, Coffee, Red Tea
 ```
   
-附：  
-
-创建型模式
-====================
-  * [Java设计模式之工厂方法Factory Method]({{ site.url }}/java/2015/05/10/Java设计模式之工厂方法FactoryMethod.html)
-  * [Java设计模式之创建者Builder]({{ site.url }}/java/2015/05/10/Java设计模式之创建者Builder.html)
-  * [Java设计模式之抽象工厂模式Abstract Factory]({{ site.url }}/java/2015/05/10/Java设计模式之抽象工厂模式AbstractFactory.html)
-  * [Java设计模式之单例模式Singleton]({{ site.url }}/java/2015/05/10/Java设计模式之单例模式Singleton.html)
-  * [Java设计模式之原型模式Prototype]({{ site.url }}/java/2015/05/10/Java设计模式之原型模式Prototype.html)  
-  
-结构型模式
-====================
-  * [Java设计模式之适配器Adapter]({{ site.url }}/java/2015/05/20/Java设计模式之适配器Adapter.html)
-  * [Java设计模式之桥接模式Bridge]({{ site.url }}/java/2015/05/20/Java设计模式之桥接模式Bridge.html)
-  * [Java设计模式之组合模式Composite]({{ site.url }}/java/2015/05/20/Java设计模式之组合模式Composite.html)
-  * [Java设计模式之装饰模式Decorator]({{ site.url }}/java/2015/05/20/Java设计模式之装饰模式Decorator.html)
-  * [Java设计模式之外观模式Facade]({{ site.url }}/java/2015/05/20/Java设计模式之外观模式Facade.html)
-  * [Java设计模式之享元模式Flyweight]({{ site.url }}/java/2015/05/20/Java设计模式之享元模式Flyweight.html)
-  * [Java设计模式之代理模式Proxy]({{ site.url }}/java/2015/05/20/Java设计模式之代理模式Proxy.html)
-  
-行为型模式
-====================  
-  * [Java设计模式之策略模式Strategy]({{ site.url }}/java/2015/05/30/Java设计模式之策略模式Strategy.html)
-  * [Java设计模式之状态模式State]({{ site.url }}/java/2015/05/30/Java设计模式之状态模式State.html)
-  * [Java设计模式之访问者Visitor]({{ site.url }}/java/2015/05/30/Java设计模式之访问者Visitor.html)
-  * [Java设计模式之观察者Observer]({{ site.url }}/java/2015/05/30/Java设计模式之观察者Observer.html)
-  * [Java设计模式之中介者Mediator]({{ site.url }}/java/2015/05/30/Java设计模式之中介者Mediator.html)
-  * [Java设计模式之命令模式Command]({{ site.url }}/java/2015/05/30/Java设计模式之命令模式Command.html)
-  * [Java设计模式之责任链模式ChainOfResponsibility]({{ site.url }}/java/2015/05/30/Java设计模式之责任链模式ChainOfResponsibility.html)
+{% include design-pattern-contents.html %}

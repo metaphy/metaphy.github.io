@@ -77,3 +77,4 @@ Drawing Circle with color Blue
 Drawing Circle with color Blue
 {% endhighlight %}
 
+{% include design-pattern-contents.html %}

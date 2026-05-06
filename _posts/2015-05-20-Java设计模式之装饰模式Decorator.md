@@ -116,3 +116,5 @@ public class CoffeeDemo {
 订单内容: 基础款咖啡, 加奶, 加糖
 最终价格: ￥15.0
 ```
+
+{% include design-pattern-contents.html %}

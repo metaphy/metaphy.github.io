@@ -161,3 +161,6 @@ Print the circle:
       .  .  .  .  .  .  .        
                .                 
 {% endhighlight %} 
+
+
+{% include design-pattern-contents.html %}
