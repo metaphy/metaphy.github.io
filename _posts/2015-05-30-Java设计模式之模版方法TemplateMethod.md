@@ -78,7 +78,7 @@ public class NormalOrderProcessor extends AbstractOrderProcessor {
 }
 
 /**
- * 3. 具体子类：促销秒杀订单（微信支付，打折，且不需要发送通知）
+ * 3. 具体子类：促销秒杀订单（银行卡支付，打折，且不需要发送通知）
  */
 public class SeckillOrderProcessor extends AbstractOrderProcessor { 
     @Override
@@ -89,7 +89,7 @@ public class SeckillOrderProcessor extends AbstractOrderProcessor {
 
     @Override
     protected void pay(String orderId, double finalPrice) {
-        System.out.println("[定制逻辑] 3.使用微信支付，订单：" + orderId + "，金额：" + finalPrice);
+        System.out.println("[定制逻辑] 3.使用银行卡支付，订单：" + orderId + "，金额：" + finalPrice);
     }
 
     // 重写钩子方法，控制算法流程
@@ -129,7 +129,7 @@ public class TemplateMethodDemo {
 ========== 处理秒杀订单 ==========
 [公共逻辑] 1.订单检查完成，库存已扣减。订单号：SK-223001
 [定制逻辑] 2.秒杀订单打6折！
-[定制逻辑] 3.使用微信支付，订单：SK-223001，金额：60.0
+[定制逻辑] 3.使用银行卡支付，订单：SK-223001，金额：60.0
 订单已完成！
 ```
 
