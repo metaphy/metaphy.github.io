@@ -1,0 +1,38 @@
+---
+layout: post
+title: "Markdown文件里插入一段音乐"
+date: 2023-10-18 10:58:00 +0800
+categories: programmer
+--- 
+
+突然发现markdown文件还能干这样的事情，还是挺震撼的。
+这个主要是利用网易音乐提供的一个iframe，嵌入到了markdown文件里，转成html后依旧是一个iframe.
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2054517809&auto=1&height=66"></iframe>
+
+```
+作词：海子 / 党骞
+作曲：党骞
+编曲：椿乐队
+演唱：椿乐队
+
+把我 葬在群山之间
+我看到鸟儿在飞翔
+睡吧 孤独的王
+这是埋葬诗歌的地方
+
+今夜 我乘风归去
+今夜 归还于野草地
+今夜 我乘风归去
+今夜 归还于野草地
+
+草原尽头 我两手空空
+悲痛时握不住一颗泪滴
+我把石头还给石头
+让胜利的胜利
+
+今夜 青稞只属于她自己
+今夜 我不关心人类
+今夜 我不关心人类
+我只想你
+```
